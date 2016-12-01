@@ -32,6 +32,7 @@ The first parameter is the Arduino pin number on which the data line of the 1-Wi
 -			10 bits	=	188ms
 -			11 bits	=	375ms
 -			12 bits	=	750ms
+
 ###	Variable “Parasitic”
 `bool IsParasitic = DSFamily.Parasitic;`. Set to "true" if there is at least one parasitically powered DS-Family device, otherwise set to "false". This is set inside the class and should not be modified.
 ###	Function “ScanForDevices”
