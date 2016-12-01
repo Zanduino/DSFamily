@@ -6,11 +6,11 @@ RAM. This library uses the available Atmel EEPROM memory to store the 8-Byte add
 ##Supported Devices
 The following Maxim Integrated DS-Family 1-Wire thermometers are supported:
 
-DS1822
-DS1825
-DS18B20
-DS18S20
-DS28EA00
+- DS1822
+- DS1825
+- DS18B20
+- DS18S20
+- DS28EA00
 
 ##1-Wire Library
 The Maxim DS-Family of thermometers use the 1-Wire microLAN protocol. There is an excellent library for 1-Wire, written by Paul Stoffregen and located at http://www.pjrc.com/teensy/td_libs_OneWire.html. 
@@ -18,8 +18,11 @@ There is also an informative page at http://playground.arduino.cc/Learning/OneWi
 to make this library useable without having to download other libraries or components, the code from version 2.0 (extracted 2016-11-23), has been included.
 
 ## Public methods
-The DSFamily library has the following publicly accessible variables and functions:
+All returned temperature values are signed 2-byte integers (int16_t) of which only 12 bits are used, negative numbers are represented in the standard 2s complement form. The units returned are the
+raw DS-Family units which are 0.0625°C each.  Thus a device value of "325" would equate to 20.3125°C. To avoid floating point, I will multiply by 625 and then divide by 100, giving an integer "2031" which would be the
+temperature Celsius times 100; or hectodegrees. This gives 2 digits of precision but will still allow all temperatures to fit into a 16 bit number.
 
+The DSFamily library has the following publicly accessible variables and functions:
 
 ###	Class instantiation. 
 `DSFamily_Class DSFamily(OneWirePin [,ReserveROM]);`
