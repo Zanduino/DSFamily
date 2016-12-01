@@ -51,6 +51,7 @@
 **                                                                                                                **
 ** Vers.  Date       Developer           Comments                                                                 **
 ** ====== ========== =================== ======================================================================== **
+** 1.0.0  2016-12-01 Arnd@SV-Zanshin.Com Initial release                                                          **
 ** 1.0.b5 2016-11-30 Arnd@SV-Zanshin.Com Moved 1-Wire calls to private, refactored some of the calls              **
 ** 1.0.b4 2016-11-29 Arnd@SV-Zanshin.Com Included the appropriate sections of the 1-Wire library, see above       **
 ** 1.0.b3 2016-11-23 Arnd@SV-Zanshin.Com Refactored the class naming from DS18B20 to support multiple types       **
