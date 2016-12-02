@@ -100,12 +100,18 @@ boolean DSFamily_Class::Read1WireScratchpad(const uint8_t deviceNumber,       //
 
 /*******************************************************************************************************************
 ** method ReadDeviceTemp() to return the current temperature value for a given device number. All devices except  **
-** the DS18S20 return raw values in 0.0625°C increments, so the 0.5°C increments of the DS18S20 are converted     **
+** the DS18S20 return raw values in 0.0625°C increments, so the 0.5°C increments of the DS18S20 are converted to  **
+** the same scale as the other devices. A check is done to see if there are still conversion(s) being done and a  **
+** delay is made until any conversions have time to complete. We only store ony value for conversion start time,  **
+** so the delay might be for another devices and might not be necessary, but the alternative is to store the      **
+** conversion times for each device which would potentially consume a lot of available memory                     **
 *******************************************************************************************************************/
 int16_t DSFamily_Class::ReadDeviceTemp(const uint8_t deviceNumber,            //                                  //
                                        const bool raw=false) {                //                                  //
   uint8_t dsBuffer[9];                                                        // Buffer to hold scratchpad return //
   int16_t temperature = DS_BAD_TEMPERATURE;                                   // Holds return value               //
+  if ((_ConvStartTime+ConversionMillis)>millis())                             // If a conversion is still running //
+    delay(millis()-(_ConvStartTime+ConversionMillis));                        // then wait until it is finished   //
   if ( deviceNumber < ThermometersFound &&                                    // on a successful read from the    //
        Read1WireScratchpad(deviceNumber,dsBuffer)) {                          // device scratchpad                //
     if (dsBuffer[0]==DS1822_FAMILY) {                                         // The results returned by DS18S20  //
@@ -338,7 +344,6 @@ float DSFamily_Class::StdDevTemperature(const uint8_t skipDeviceNumber=UINT8_MAX
   return(StdDev);                                                             //                                  //
 } // of method StdDevTemperature                                              //----------------------------------//
 
-
 /*******************************************************************************************************************
 ** 1-Wire: Method reset_search(). You need to use this function to start a search again from the beginning. You   **
 ** do not need to do it for the first search, though you could.                                                   **
@@ -555,12 +560,15 @@ uint8_t DSFamily_Class::crc8(const uint8_t *addr, uint8_t len) {              //
 } // of method crc8()                                                         //----------------------------------//
 
 /*******************************************************************************************************************
-** Method ParasiticWait(). Wait for any active converstion to complete before doing any 1-Wire actions when one   **
-** or more devices on the 1-Wire microLAN are using parasitic power                                               **
+** Method ParasiticWait(). Any parasitically device needs to have a strong power pullup on the 1-Wire data line   **
+** during conversion.  This means that the whole 1-Wire microLAN is effectively blocked during the rather lengthy **
+** conversion time; since using the bus would cause the parasitically powered device to abort conversion. There-  **
+** this function will wait until the last conversion request has had enough time to complete. The wait time might **
+** be unnecessary, but since we only track the last conversion start rather than track each device independently  **
+** this is the best we can do.                                                                                    **
 *******************************************************************************************************************/
 void DSFamily_Class::ParasiticWait() {                                        //                                  //
-  if (Parasitic) {                                                            // if we have a parasitic device    //
-    if ((_ConvStartTime+ConversionMillis)>millis())                           // if we have to wait for a conver- //
-      delay(millis()-(_ConvStartTime+ConversionMillis));                      // sion to finish then wait         //
+  if (Parasitic && ((_ConvStartTime+ConversionMillis)>millis())) {            // If parasitic & active conversion //
+      delay(millis()-(_ConvStartTime+ConversionMillis));                      // then wait until it is finished   //
   } // of if-then we have a parasitic device on the 1-Wire                    //                                  //
 } // of method ParasiticWait()                                                //----------------------------------//
