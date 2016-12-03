@@ -67,6 +67,7 @@ DSFamily_Class::~DSFamily_Class() { }                                         //
 *******************************************************************************************************************/
 uint8_t DSFamily_Class::ScanForDevices() {                                    //                                  //
   uint8_t tempTherm[8];                                                       // Temporary DS address array       //
+  _LastCommandWasConvert = false;                                             // Set switch to false              //
   reset_search();                                                             // Reset the search status          //
   ThermometersFound = 0;                                                      // Reset the number of thermometers //
   while (search(tempTherm)) {                                                 // Use the 1-Wire "search" method   //
@@ -92,6 +93,7 @@ uint8_t DSFamily_Class::ScanForDevices() {                                    //
 *******************************************************************************************************************/
 boolean DSFamily_Class::Read1WireScratchpad(const uint8_t deviceNumber,       //                                  //
                                            uint8_t buffer[9]) {               //                                  //
+  _LastCommandWasConvert = false;                                             // Set switch to false              //
   SelectDevice(deviceNumber);                                                 // Reset the 1-wire, address device //
   write_byte(DS_READ_SCRATCHPAD);                                             // Request device send Scratchpad   //
   for (uint8_t i=0;i<9;i++) buffer[i] = read_byte();                          // read all 9 bytes sent by DS      //
@@ -110,8 +112,10 @@ int16_t DSFamily_Class::ReadDeviceTemp(const uint8_t deviceNumber,            //
                                        const bool raw=false) {                //                                  //
   uint8_t dsBuffer[9];                                                        // Buffer to hold scratchpad return //
   int16_t temperature = DS_BAD_TEMPERATURE;                                   // Holds return value               //
-  if ((_ConvStartTime+ConversionMillis)>millis())                             // If a conversion is still running //
+  if (Parasitic || !_LastCommandWasConvert) {                                 // Wait a fixed time in parasite or //
+    if ((_ConvStartTime+ConversionMillis)>millis())                           // If a conversion is still running //
     delay(millis()-(_ConvStartTime+ConversionMillis));                        // then wait until it is finished   //
+  } else if (_LastCommandWasConvert) while(read_bit()==0);                    // bit high when conversion finished//
   if ( deviceNumber < ThermometersFound &&                                    // on a successful read from the    //
        Read1WireScratchpad(deviceNumber,dsBuffer)) {                          // device scratchpad                //
     if (dsBuffer[0]==DS1822_FAMILY) {                                         // The results returned by DS18S20  //
@@ -126,10 +130,12 @@ int16_t DSFamily_Class::ReadDeviceTemp(const uint8_t deviceNumber,            //
 
 /*******************************************************************************************************************
 ** method DeviceStartConvert() to start the sampling and conversion on a device. At maximum resolution this       **
-** conversion can take 750ms. If the optional parameter is not specified then all device conversions are started  **
-** at the same time                                                                                               **
+** conversion can take 750ms. If the optional deviceNumber is not specified then all device conversions are       **
+** started at the same time. If the optional WaitSwitch parameter is set to "true" then call doesn't return until **
+** the conversion has completed                                                                                   **
 *******************************************************************************************************************/
-void DSFamily_Class::DeviceStartConvert(const uint8_t deviceNumber=UINT8_MAX){//                                  //
+void DSFamily_Class::DeviceStartConvert(const uint8_t deviceNumber=UINT8_MAX, //                                  //
+                                        const bool WaitSwitch = false) {      //                                  //
   ParasiticWait();                                                            // Wait for conversion if necessary //
   if (deviceNumber==UINT8_MAX) {                                              // If no parameter specified, use   //
     reset();                                                                  // Reset 1-wire network             //
@@ -137,6 +143,8 @@ void DSFamily_Class::DeviceStartConvert(const uint8_t deviceNumber=UINT8_MAX){//
   } else SelectDevice(deviceNumber); // of if-then all devices or just one    //                                  //
   write_byte(DS_START_CONVERT);                                               // Initiate temperature conversion  //
   _ConvStartTime = millis();                                                  // Store start time of conversion   //
+  _LastCommandWasConvert = true;                                              // Set switch to true               //
+  if (!Parasitic && WaitSwitch) while(read_bit()==0);                         // Read bit goes high when finished //
 } // of method DeviceStartConvert                                             //----------------------------------//
 
 /*******************************************************************************************************************
@@ -161,6 +169,7 @@ void DSFamily_Class::Calibrate(const uint8_t iterations=30) {                 //
   int64_t tempSum                     =   0;                                  // Stores interim values            //
   int8_t  offset                      =   0;                                  // Stores the computed offset value //
   uint8_t ThermometersUsed = min(DS_MAX_THERMOMETERS,ThermometersFound);      // Use the lower of the 2 values    //
+  _LastCommandWasConvert = false;                                             // Set switch to false              //
   for (uint8_t i=0;i<iterations;i++) {                                        // Loop to get a good sampling      //
     for(uint8_t x=0;x<ThermometersUsed;x++) {                                 // process each thermometer         //
       stats1[x] += ReadDeviceTemp(x,true);                                    // read raw temperature, no offset  //
@@ -182,6 +191,7 @@ void DSFamily_Class::Calibrate(const uint8_t iterations=30) {                 //
 void DSFamily_Class::SetDeviceCalibration(const uint8_t deviceNumber,         //                                  //
                                           const int8_t offset) {              //                                  //
   uint8_t dsBuffer[9];                                                        // Temporary scratchpad buffer      //
+  _LastCommandWasConvert = false;                                             // Set switch to false              //
   Read1WireScratchpad(deviceNumber,dsBuffer);                                 // Read from the device scratchpad  //
   SelectDevice(deviceNumber);                                                 // Reset 1-wire, address device     //
   write_byte(DS_WRITE_SCRATCHPAD);                                            // Write scratchpad, send 3 bytes   //
@@ -199,6 +209,7 @@ void DSFamily_Class::SetDeviceCalibration(const uint8_t deviceNumber,         //
 int8_t DSFamily_Class::GetDeviceCalibration(const uint8_t deviceNumber) {     //                                  //
   int8_t offset = INT8_MIN;                                                   // Default to an invalid value      //
   uint8_t dsBuffer[9];                                                        // Temporary scratchpad buffer      //
+  _LastCommandWasConvert = false;                                             // Set switch to false              //
   Read1WireScratchpad(deviceNumber,dsBuffer);                                 // Read from the device scratchpad  //
   if (dsBuffer[2]^dsBuffer[3]==0xFF) offset = (int8_t)dsBuffer[2];            // Use the calibration value        //
   return (offset);                                                            // Return the computed offset       //
@@ -221,6 +232,7 @@ void DSFamily_Class::SelectDevice(const uint8_t deviceNumber) {               //
 *******************************************************************************************************************/
 void DSFamily_Class::GetDeviceROM(const uint8_t deviceNumber,                 //                                  //
                                   uint8_t ROMBuffer[8]) {                     // Array to hold unique DS ID       //
+  _LastCommandWasConvert = false;                                             // Set switch to false              //
   for (uint8_t i=0;i<8;i++)                                                   // loop for each byte in the buffer //
   ROMBuffer[i]=EEPROM.read(i+E2END-((deviceNumber+1)*8));                     // Read the EEPROM byte             //
 } // of method GetDeviceROM()                                                 //----------------------------------//
@@ -287,6 +299,7 @@ int16_t DSFamily_Class::AvgTemperature(const uint8_t skipDeviceNumber=UINT8_MAX)
 void DSFamily_Class::SetDeviceResolution(const uint8_t deviceNumber,          // Set resolution to 9,10,11 or 12 b//
                                   uint8_t resolution) {                       //                                  //
   uint8_t dsBuffer[9];                                                        // Buffer to hold scratchpad values //
+  _LastCommandWasConvert = false;                                             // Set switch to false              //
   if(resolution<9 || resolution>12) resolution = 12;                          // Default to full resolution       //
   switch (resolution) {                                                       // Now select which action to do    //
     case 12:                                                                  // When 12 bits of precision used   //
@@ -319,11 +332,12 @@ void DSFamily_Class::SetDeviceResolution(const uint8_t deviceNumber,          //
 ** Method SetUserBytes to set the user bytes 1 and 2 to the calibration computed                                  **
 *******************************************************************************************************************/
 uint8_t DSFamily_Class::GetDeviceResolution(const uint8_t deviceNumber) {     //                                  //
-   uint8_t resolution;                                                        // Store the return value           //
-   uint8_t dsBuffer[9];                                                       // Hold scratchpad return values    //
-   Read1WireScratchpad(deviceNumber,dsBuffer);                                // Read from the device scratchpad  //
-   resolution = (dsBuffer[DS_CONFIG_BYTE]>>5)+9;                              // get bits 6&7 from the config byte//
-   return(resolution);                                                        //                                  //
+  uint8_t resolution;                                                         // Store the return value           //
+  uint8_t dsBuffer[9];                                                        // Hold scratchpad return values    //
+  _LastCommandWasConvert = false;                                             // Set switch to false              //
+  Read1WireScratchpad(deviceNumber,dsBuffer);                                 // Read from the device scratchpad  //
+  resolution = (dsBuffer[DS_CONFIG_BYTE]>>5)+9;                               // get bits 6&7 from the config byte//
+  return(resolution);                                                         //                                  //
 } // of method GetDeviceResolution()                                          //----------------------------------//
 
 /*******************************************************************************************************************

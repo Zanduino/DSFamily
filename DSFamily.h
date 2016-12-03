@@ -51,6 +51,7 @@
 **                                                                                                                **
 ** Vers.  Date       Developer           Comments                                                                 **
 ** ====== ========== =================== ======================================================================== **
+** 1.0.2  2016-12-03 Arnd@SV-Zanshin.Com Added optional ReadDeviceTemp "WaitSwitch", minimized conversion delays  **
 ** 1.0.1  2016-12-02 Arnd@SV-Zanshin.Com Added delays for ReadDeviceTemp() and when a parasitic device is present **
 ** 1.0.0  2016-12-01 Arnd@SV-Zanshin.Com Initial release                                                          **
 ** 1.0.b5 2016-11-30 Arnd@SV-Zanshin.Com Moved 1-Wire calls to private, refactored some of the calls              **
@@ -136,7 +137,8 @@
       uint8_t  ScanForDevices      ();                                        // Scan/rescan the 1-Wire microLAN  //
       int16_t  ReadDeviceTemp      (const uint8_t deviceNumber,               // Return the temperature           //
                                     const bool raw=false);                    // optionally using the raw value   //
-      void     DeviceStartConvert  (const uint8_t deviceNumber=UINT8_MAX);    // Start conversion on device       //
+      void     DeviceStartConvert  (const uint8_t deviceNumber=UINT8_MAX,     // Start conversion on device       //
+                                    const bool    WaitSwitch=false);          // optionally wait for it to finish //
       void     Calibrate           (const uint8_t iterations=30);             // Calibrate to read identically    //
       int8_t   GetDeviceCalibration(const uint8_t deviceNumber);              // Get the device's calibration     //
       void     SetDeviceCalibration(const uint8_t deviceNumber,               // Set calibration bytes 1 & 2      //
@@ -156,6 +158,7 @@
       void     ParasiticWait();                                               // Wait for conversion if parasitic //
       uint8_t  _MaxThermometers;                                              // Devices fit (EEPROM-ReserveRom)  //
       uint32_t _ConvStartTime;                                                // Conversion start time            //
+      bool     _LastCommandWasConvert=false;                                  // Unset when other commands issued //
       IO_REG_TYPE bitmask;                                                    //                                  //
       volatile IO_REG_TYPE *baseReg;                                          //                                  //
       unsigned char ROM_NO[8];                                                // global search state              //
