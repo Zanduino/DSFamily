@@ -144,7 +144,9 @@ void DSFamily_Class::DeviceStartConvert(const uint8_t deviceNumber=UINT8_MAX, //
   write_byte(DS_START_CONVERT);                                               // Initiate temperature conversion  //
   _ConvStartTime = millis();                                                  // Store start time of conversion   //
   _LastCommandWasConvert = true;                                              // Set switch to true               //
-  if (!Parasitic && WaitSwitch) while(read_bit()==0);                         // Read bit goes high when finished //
+  if (WaitSwitch)                                                             // Don't return until finished      //
+    if (Parasitic) ParasiticWait();                                           // wait a fixed period when parasite//
+    else while(read_bit()==0);                                                // Read bit goes high when finished //
 } // of method DeviceStartConvert                                             //----------------------------------//
 
 /*******************************************************************************************************************
@@ -583,6 +585,6 @@ uint8_t DSFamily_Class::crc8(const uint8_t *addr, uint8_t len) {              //
 *******************************************************************************************************************/
 void DSFamily_Class::ParasiticWait() {                                        //                                  //
   if (Parasitic && ((_ConvStartTime+ConversionMillis)>millis())) {            // If parasitic & active conversion //
-      delay(millis()-(_ConvStartTime+ConversionMillis));                      // then wait until it is finished   //
+      delay((_ConvStartTime+ConversionMillis)-millis());                      // then wait until it is finished   //
   } // of if-then we have a parasitic device on the 1-Wire                    //                                  //
 } // of method ParasiticWait()                                                //----------------------------------//
