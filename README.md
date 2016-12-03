@@ -41,7 +41,7 @@ The Maxim DS-Family of thermometers use the 1-Wire microLAN protocol. There is a
 There is also an informative page at http://playground.arduino.cc/Learning/OneWire describing how to use the library. As there are parts of the code that are unnecessary for this DS implementation and 
 to make this library useable without having to download other libraries or components, the code from version 2.0 (extracted 2016-11-23), has been included.
 
-Details are available at the [GitHub DSFamil Wiki](https://github.com/SV-Zanshin/DSFamily/wiki)
+Details are available at the [GitHub DSFamily Wiki](https://github.com/SV-Zanshin/DSFamily/wiki)
 
 
-![Zanshin Logo](https://www.sv-zanshin.com/images/gif/zanshincalligraphy.gif)
+![Zanshin Logo](https://www.sv-zanshin.com/images/gif/zanshinkanjitiny.gif) <img src="https://www.sv-zanshin.com/images/gif/zanshintext.gif" width="75"/>
