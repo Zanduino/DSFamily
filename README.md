@@ -7,26 +7,31 @@ RAM. This library uses the available Atmel EEPROM memory to store the 8-Byte add
 The following Maxim Integrated DS-Family 1-Wire thermometers are supported:
 
 <table>
- <th>
-  DS-Family<br>Device
- </th>
+ <th>DS-Family Device</th>
+ <th>Datasheet</th>
  <tr>
   <td>DS1822</td>
+  <td><a href="https://datasheets.maximintegrated.com/en/ds/DS1822.pdf">DS1822 Datasheet</a></td>
  </tr>
  <tr>
   <td>DS1825</td>
+  <td><a href="https://datasheets.maximintegrated.com/en/ds/DS1825.pdf">DS1825 Datasheet</a></td>
  </tr>
  <tr>
   <td>DS18B20</td>
+  <td><a href="http://datasheets.maximintegrated.com/en/ds/DS18B20.pdf">DS18B20 Datasheet</a></td>
  </tr>
  <tr>
   <td>DS1820</td>
+  <td><a href="https://datasheets.maximintegrated.com/en/ds/DS18S20.pdf">DS1820 Datasheet</a></td>
  </tr>
  <tr>
   <td>DS18S20</td>
+  <td><a href="https://datasheets.maximintegrated.com/en/ds/DS18S20.pdf">DS18S20 Datasheet</a></td>
  </tr>
  <tr>
   <td>DS28EA00</td>
+  <td><a href="https://datasheets.maximintegrated.com/en/ds/DS28EA00.pdf">DS28EA00 Datasheet</a></td>
  </tr>
 </table>
 
