@@ -169,29 +169,24 @@ void DSFamily_Class::DeviceStartConvert(const uint8_t deviceNumber=UINT8_MAX, //
 ** to. This temperature is a signed integer in hectodegrees Celsius, so a temperature of "28.12" would be "2812". **
 **                                                                                                                **
 *******************************************************************************************************************/
-void DSFamily_Class::Calibrate(const uint8_t iterations=30,                   //                                  //
-                               const int16_t CalTemp   =INT16_MAX) {          //                                  //
+void DSFamily_Class::Calibrate(const uint8_t iterations = 30,                 //                                  //
+                               const int16_t CalTemp    = INT16_MAX) {        //                                  //
   const uint8_t  DS_MAX_THERMOMETERS  =  32;                                  // Specify a maximum number here    //
   int64_t stats1[DS_MAX_THERMOMETERS] = {0};                                  // store statistics per device      //
   int64_t tempSum                     =   0;                                  // Stores interim values            //
   int8_t  offset                      =   0;                                  // Stores the computed offset value //
   uint8_t ThermometersUsed = min(DS_MAX_THERMOMETERS,ThermometersFound);      // Use the lower of the 2 values    //
   _LastCommandWasConvert = false;                                             // Set switch to false              //
-  if (CalTemp==INT16_MAX) {                                                   // If we haven's specified temps,   //
-    for (uint8_t i=0;i<iterations;i++) {                                      // Loop to get a good sampling      //
-      for(uint8_t x=0;x<ThermometersUsed;x++) {                               // process each thermometer         //
-        stats1[x] += ReadDeviceTemp(x,true);                                  // read raw temperature, no offset  //
-      }  // of for each thermometer loop                                      //                                  //
-      DeviceStartConvert();                                                   // Start conversion on all devices  //
-      delay(ConversionMillis);                                                // Wait to complete measurements    //
-    } // of for loop                                                          //                                  //
-    for (uint8_t i=0;i<ThermometersUsed;i++) tempSum += stats1[i];            // Add value to standard dev comps  //
-    tempSum = tempSum/iterations/ThermometersUsed;                            // tempSum now holds average value  //
-  } else {                                                                    // Otherwise specify target temp    //
-    tempSum = iterations*((CalTemp*10)/625);                                  // Convert HectoC to internal temp  //
-    for(uint8_t x=0;x<ThermometersUsed;x++) stats1[x] = tempSum;              // Set stats value to calibration   //
-    tempSum = (CalTemp*10)/625;                                               // Store calibration value          //
-  } // of if-then-else we have to get a temperature                           //                                  //   
+  for (uint8_t i=0;i<iterations;i++) {                                        // Loop to get a good sampling      //
+    for(uint8_t x=0;x<ThermometersUsed;x++) {                                 // process each thermometer         //
+      stats1[x] += ReadDeviceTemp(x,true);                                    // read raw temperature, no offset  //
+    }  // of for each thermometer loop                                        //                                  //
+    DeviceStartConvert();                                                     // Start conversion on all devices  //
+    delay(ConversionMillis);                                                  // Wait to complete measurements    //
+  } // of for loop                                                            //                                  //
+  for (uint8_t i=0;i<ThermometersUsed;i++) tempSum += stats1[i];              // Add value to standard dev comps  //
+  if (CalTemp==INT16_MAX) tempSum = (CalTemp*10)/625;                         // Use specific target temperature  //
+                     else tempSum = tempSum/iterations/ThermometersUsed;      // or compute average temperature   //
   for (uint8_t i=0;i<ThermometersUsed;i++) {                                  // Loop for every thermometer found //
     offset = tempSum-(stats1[i]/iterations);                                  // Compute offset value from mean   //
     SetDeviceCalibration(i,offset);                                           // Set the new user bytes 1&2       //
