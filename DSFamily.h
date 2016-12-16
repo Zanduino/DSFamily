@@ -51,6 +51,7 @@
 **                                                                                                                **
 ** Vers.  Date       Developer           Comments                                                                 **
 ** ====== ========== =================== ======================================================================== **
+** 1.0.3  2016-12-16 Arnd@SV-Zanshin.Com Added optional CalibrationTemp to Calibrate function                     **
 ** 1.0.2  2016-12-03 Arnd@SV-Zanshin.Com Added optional ReadDeviceTemp "WaitSwitch", minimized conversion delays  **
 ** 1.0.1  2016-12-02 Arnd@SV-Zanshin.Com Added delays for ReadDeviceTemp() and when a parasitic device is present **
 ** 1.0.0  2016-12-01 Arnd@SV-Zanshin.Com Initial release                                                          **
@@ -139,7 +140,8 @@
                                     const bool raw=false);                    // optionally using the raw value   //
       void     DeviceStartConvert  (const uint8_t deviceNumber=UINT8_MAX,     // Start conversion on device       //
                                     const bool    WaitSwitch=false);          // optionally wait for it to finish //
-      void     Calibrate           (const uint8_t iterations=30);             // Calibrate to read identically    //
+      void     Calibrate           (const uint8_t iterations=30,              // Calibrate thermometers to read   //
+                                    const int16_t CalTemp=INT16_MAX);         // identically                      //
       int8_t   GetDeviceCalibration(const uint8_t deviceNumber);              // Get the device's calibration     //
       void     SetDeviceCalibration(const uint8_t deviceNumber,               // Set calibration bytes 1 & 2      //
                                     const int8_t  offset);                    //                                  //
