@@ -94,10 +94,15 @@ uint8_t DSFamily_Class::ScanForDevices() {                                    //
 boolean DSFamily_Class::Read1WireScratchpad(const uint8_t deviceNumber,       //                                  //
                                            uint8_t buffer[9]) {               //                                  //
   _LastCommandWasConvert = false;                                             // Set switch to false              //
-  SelectDevice(deviceNumber);                                                 // Reset the 1-wire, address device //
-  write_byte(DS_READ_SCRATCHPAD);                                             // Request device send Scratchpad   //
-  for (uint8_t i=0;i<9;i++) buffer[i] = read_byte();                          // read all 9 bytes sent by DS      //
-  return(crc8(buffer,8) == buffer[8] );                                       // Return false if bad CRC checksum //
+  bool    CRCStatus      = false;                                             // default to a bad reading         //
+  uint8_t ErrorCounter   =     0;                                             // Count number of bad readings     //
+  while (!CRCStatus && ErrorCounter++ < 10) {                                 // Loop until good read or overflow //
+    SelectDevice(deviceNumber);                                               // Reset the 1-wire, address device //
+    write_byte(DS_READ_SCRATCHPAD);                                           // Request device send Scratchpad   //
+    for (uint8_t i=0;i<9;i++) buffer[i] = read_byte();                        // read all 9 bytes sent by DS      //
+    CRCStatus = crc8(buffer,8) == buffer[8];                                  // Check to see if result is valid  //
+  } // of loop until good read or number of errors exceeded                   //                                  //
+  return(CRCStatus);                                                          // Return false if bad CRC checksum //
 } // of method Read1WireScratchpad()                                          //----------------------------------//
 
 /*******************************************************************************************************************
@@ -118,7 +123,7 @@ int16_t DSFamily_Class::ReadDeviceTemp(const uint8_t deviceNumber,            //
   } else if (_LastCommandWasConvert) while(read_bit()==0);                    // bit high when conversion finished//
   if ( deviceNumber < ThermometersFound &&                                    // on a successful read from the    //
        Read1WireScratchpad(deviceNumber,dsBuffer)) {                          // device scratchpad                //
-    if (dsBuffer[0]==DS1822_FAMILY) {                                         // The results returned by DS18S20  //
+    if (ROM_NO[0]==DS1822_FAMILY) {                                           // If DS1822 then temp is different //
       temperature = ((dsBuffer[1] << 8) | dsBuffer[0])<<3;                    // get the raw reading and apply    //
       temperature = (temperature & 0xFFF0) + 12 - dsBuffer[6];                // value from "count remain" byte   //
     } else temperature = (dsBuffer[1]<<8)|dsBuffer[0];                        // Results come in 2s complement    //
@@ -227,12 +232,11 @@ int8_t DSFamily_Class::GetDeviceCalibration(const uint8_t deviceNumber) {     //
 ** Method SelectDevice will reset the 1-Wire microLAN and select the device number specified                      **
 *******************************************************************************************************************/
 void DSFamily_Class::SelectDevice(const uint8_t deviceNumber) {               //                                  //
-  uint8_t ROMBuffer[8];                                                       // Array to hold unique DS ID       //
   ParasiticWait();                                                            // Wait for conversion if necessary //
   for (uint8_t i=0;i<8;i++)                                                   //                                  //
-    ROMBuffer[i]=EEPROM.read(i+E2END-((deviceNumber+1)*8));                   // Read the EEPROM byte             //
+    ROM_NO[i]=EEPROM.read(i+E2END-((deviceNumber+1)*8));                      // Read the EEPROM byte             //
   reset();                                                                    // Reset 1-wire communications      //
-  select(ROMBuffer);                                                          // Select only current device       //
+  select(ROM_NO);                                                             // Select only current device       //
 } // of method SelectDevice()                                                 //----------------------------------//
 
 /*******************************************************************************************************************

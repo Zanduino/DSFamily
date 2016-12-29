@@ -51,6 +51,8 @@
 **                                                                                                                **
 ** Vers.  Date       Developer           Comments                                                                 **
 ** ====== ========== =================== ======================================================================== **
+** 1.0.4  2016-12-29 Arnd@SV-Zanshin.Com Added error loop to Read1WireScratchpad(), corrected DS18S20 call in     **
+                                         ReadDeviceTemp() function to avoid false temperatures                    **
 ** 1.0.3  2016-12-16 Arnd@SV-Zanshin.Com Added optional CalibrationTemp to Calibrate function                     **
 ** 1.0.2  2016-12-03 Arnd@SV-Zanshin.Com Added optional ReadDeviceTemp "WaitSwitch", minimized conversion delays  **
 ** 1.0.1  2016-12-02 Arnd@SV-Zanshin.Com Added delays for ReadDeviceTemp() and when a parasitic device is present **
