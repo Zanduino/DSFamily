@@ -46,7 +46,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 69dfd1d8797ddf02b94d84276bb1b005f5930832
 =======
 >>>>>>> 69dfd1d8797ddf02b94d84276bb1b005f5930832
 # Files and directories from the Atmel Studio Arduino IDE
@@ -56,8 +59,12 @@ Debug
 *.atsln
 *.componentinfo.xml
 <<<<<<< HEAD
+<<<<<<< HEAD
 *.cppproj
 =======
 *.cppproj
 >>>>>>> 69dfd1d8797ddf02b94d84276bb1b005f5930832
 .gitattributes
+=======
+*.cppproj
+>>>>>>> 69dfd1d8797ddf02b94d84276bb1b005f5930832
