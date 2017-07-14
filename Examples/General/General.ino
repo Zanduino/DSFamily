@@ -2,14 +2,13 @@
 ** This program demonstrates some of the general functionality in the DSFamily library.                           **
 **                                                                                                                **
 **                                                                                                                **
-** The following 2 constants can/should be adjusted according to the 1-Wire configuration and user preferences:   **
+** The following constant can/should be adjusted according to the 1-Wire configuration and user preferences:      **
 ** "ONE_WIRE_PIN"           is the Arduino pin on which the data line of the 1-Wire system is attached            **
-** "CALIBRATION_ITERATIONS" is the number of iterations to average temperature measurements per thermometer       **
 **                                                                                                                **
 **                                                                                                                **
 ** The precision of the DS-Family devices is programmable from 9 to 12 bits and the granularity of readings is    **
-** 0.0625°C. All temperature readings coming back from the library are signed 16 bit numbers in increments of     **
-** 0.0625°C. This means if a temperature reading is "355" it equates to 21.875°C.                                 **
+** 0.0625Â°C. All temperature readings coming back from the library are signed 16 bit numbers in increments of     **
+** 0.0625Â°C. This means if a temperature reading is "355" it equates to 21.875Â°C.                                 **
 **                                                                                                                **
 ** This program is free software: you can redistribute it and/or modify it under the terms of the GNU General     **
 ** Public License as published by the Free Software Foundation, either version 3 of the License, or (at your      **
@@ -20,6 +19,7 @@
 **                                                                                                                **
 ** Vers.  Date       Developer           Comments                                                                 **
 ** ====== ========== =================== ======================================================================== **
+** 1.0.1  2017-07-14 Arnd@SV-Zanshin.Com Removed calibration references in program as they are unused             **
 ** 1.0.0  2016-11-30 Arnd@SV-Zanshin.Com Initial coding                                                           **
 **                                                                                                                **
 *******************************************************************************************************************/
