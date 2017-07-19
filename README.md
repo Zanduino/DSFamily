@@ -1,5 +1,5 @@
 # DS-Family library
-*Arduino* library for using any/all of the "DS" Family of Maxim Integrated 1-Wire thermometers.  This library is specifically geared towards installations with several devices, particularly where the number of
+<img src="https://github.com/SV-Zanshin/DSFamily/blob/master/Images/DS18B20.jpg" width="175" align="right"/> *Arduino* library for using any/all of the "DS" Family of Maxim Integrated 1-Wire thermometers.  This library is specifically geared towards installations with several devices, particularly where the number of
 attached devices is not known at design time. Each 1-Wire device has a unique 8 Byte ROM code which is used to address the device, so keeping 16 device addresses in memory can use a significant amount of available
 RAM. This library uses the available Atmel EEPROM memory to store the 8-Byte addresses and reference to the devices is done via an integer index rather than device number.
 
