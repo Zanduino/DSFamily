@@ -51,6 +51,8 @@
 **                                                                                                                **
 ** Vers.  Date       Developer           Comments                                                                 **
 ** ====== ========== =================== ======================================================================== **
+** 1.0.5  2017-07-31 Arnd@SV-Zanshin.Com Only function prototypes may have default values as this may cause       **
+**                                       compiler errors.                                                         **
 ** 1.0.4  2016-12-29 Arnd@SV-Zanshin.Com Added error loop to Read1WireScratchpad(), corrected DS18S20 call in     **
                                          ReadDeviceTemp() function to avoid false temperatures                    **
 ** 1.0.3  2016-12-16 Arnd@SV-Zanshin.Com Added optional CalibrationTemp to Calibrate function                     **

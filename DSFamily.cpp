@@ -114,7 +114,7 @@ boolean DSFamily_Class::Read1WireScratchpad(const uint8_t deviceNumber,       //
 ** conversion times for each device which would potentially consume a lot of available memory                     **
 *******************************************************************************************************************/
 int16_t DSFamily_Class::ReadDeviceTemp(const uint8_t deviceNumber,            //                                  //
-                                       const bool raw=false) {                //                                  //
+                                       const bool raw) {                      //                                  //
   uint8_t dsBuffer[9];                                                        // Buffer to hold scratchpad return //
   int16_t temperature = DS_BAD_TEMPERATURE;                                   // Holds return value               //
   if (Parasitic || !_LastCommandWasConvert) {                                 // Wait a fixed time in parasite or //
@@ -139,8 +139,8 @@ int16_t DSFamily_Class::ReadDeviceTemp(const uint8_t deviceNumber,            //
 ** started at the same time. If the optional WaitSwitch parameter is set to "true" then call doesn't return until **
 ** the conversion has completed                                                                                   **
 *******************************************************************************************************************/
-void DSFamily_Class::DeviceStartConvert(const uint8_t deviceNumber=UINT8_MAX, //                                  //
-                                        const bool WaitSwitch = false) {      //                                  //
+void DSFamily_Class::DeviceStartConvert(const uint8_t deviceNumber,           //                                  //
+                                        const bool WaitSwitch ) {             //                                  //
   ParasiticWait();                                                            // Wait for conversion if necessary //
   if (deviceNumber==UINT8_MAX) {                                              // If no parameter specified, use   //
     reset();                                                                  // Reset 1-wire network             //
@@ -174,8 +174,8 @@ void DSFamily_Class::DeviceStartConvert(const uint8_t deviceNumber=UINT8_MAX, //
 ** to. This temperature is a signed integer in hectodegrees Celsius, so a temperature of "28.12" would be "2812". **
 **                                                                                                                **
 *******************************************************************************************************************/
-void DSFamily_Class::Calibrate(const uint8_t iterations = 30,                 //                                  //
-                               const int16_t CalTemp    = INT16_MAX) {        //                                  //
+void DSFamily_Class::Calibrate(const uint8_t iterations,                      //                                  //
+                               const int16_t CalTemp ) {                      //                                  //
   const uint8_t  DS_MAX_THERMOMETERS  =  32;                                  // Specify a maximum number here    //
   int64_t stats1[DS_MAX_THERMOMETERS] = {0};                                  // store statistics per device      //
   int64_t tempSum                     =   0;                                  // Stores interim values            //
@@ -254,7 +254,7 @@ void DSFamily_Class::GetDeviceROM(const uint8_t deviceNumber,                 //
 ** skipDeviceNumber is specified then that device number is skipped; this is used when one of the thermometers is **
 ** out-of-band - i.e. if it is attached to an evaporator plate and reads much lower than the others.              **
 *******************************************************************************************************************/
-int16_t DSFamily_Class::MinTemperature(uint8_t skipDeviceNumber=UINT8_MAX) {  // Minimum of devices, optional skip//
+int16_t DSFamily_Class::MinTemperature(uint8_t skipDeviceNumber) {            // Minimum of devices, optional skip//
   int16_t minimumTemp = INT16_MAX;                                            // Starts at highest possible value //
   int16_t deviceTemp;                                                         // Store temperature for comparison //
   for (uint8_t i=0;i<ThermometersFound;i++) {                                 // loop each thermometer found      //
@@ -270,7 +270,7 @@ int16_t DSFamily_Class::MinTemperature(uint8_t skipDeviceNumber=UINT8_MAX) {  //
 ** skipDeviceNumber is specified then that device number is skipped; this is used when one of the thermometers is **
 ** out-of-band - i.e. if it is attached to a heat source and reads much higher than the others.                   **
 *******************************************************************************************************************/
-int16_t DSFamily_Class::MaxTemperature(uint8_t skipDeviceNumber=UINT8_MAX) {  // Maximum temperature of devices   //
+int16_t DSFamily_Class::MaxTemperature(uint8_t skipDeviceNumber) {            // Maximum temperature of devices   //
   int16_t maximumTemp = INT16_MIN;                                            // Starts at lowest possible value  //
   int16_t deviceTemp;                                                         // temporarily store temperature    //
   for (uint8_t i=0;i<ThermometersFound;i++) {                                 // loop through each thermometer    //
@@ -285,7 +285,7 @@ int16_t DSFamily_Class::MaxTemperature(uint8_t skipDeviceNumber=UINT8_MAX) {  //
 ** skipDeviceNumber is specified then that device number is skipped; this is used when one of the thermometers is **
 ** out-of-band                                                                                                    **
 *******************************************************************************************************************/
-int16_t DSFamily_Class::AvgTemperature(const uint8_t skipDeviceNumber=UINT8_MAX){// Average temperature of devices//
+int16_t DSFamily_Class::AvgTemperature(const uint8_t skipDeviceNumber){       // Average temperature of devices//
   int16_t AverageTemp = 0;                                                    // return value starts at 0         //
   int16_t deviceTemp;                                                         // store temperature for comparison //
   for (uint8_t i=0;i<ThermometersFound;i++) {                                 // loop through each thermometer    //
@@ -357,7 +357,7 @@ uint8_t DSFamily_Class::GetDeviceResolution(const uint8_t deviceNumber) {     //
 ** optional skipDeviceNumber is specified then that device number is skipped; this is used when one of the        **
 ** thermometers is out-of-band                                                                                    **
 *******************************************************************************************************************/
-float DSFamily_Class::StdDevTemperature(const uint8_t skipDeviceNumber=UINT8_MAX){//Average temperature of devices//
+float DSFamily_Class::StdDevTemperature(const uint8_t skipDeviceNumber){      //Average temperature of devices//
   float StdDev = 0;                                                           // computed standard deviation      //
   int16_t AverageTemp = AvgTemperature(skipDeviceNumber);                     // Compute the average              //
   for (uint8_t i=0;i<ThermometersFound;i++) {                                 // loop through each thermometer    //
@@ -464,7 +464,7 @@ uint8_t DSFamily_Class::read_bit(void) {                                      //
 ** you need power after the write (e.g. DS18S20 in parasite power mode) then set 'power' to 1, otherwise the pin  **
 ** will go tri-state at the end of the write to avoid heating in a short or other mishap.                         **
 *******************************************************************************************************************/
-void DSFamily_Class::write_byte(uint8_t v, uint8_t power = 0 ) {              //                                  //
+void DSFamily_Class::write_byte(uint8_t v, uint8_t ) {                        //                                  //
   uint8_t bitMask;                                                            // Bit mask                         //
   for (bitMask = 0x01; bitMask; bitMask <<= 1) write_bit( (bitMask & v)?1:0); // Write bits until empty           //
   if ( !power) {                                                              // Set pin in parasite mode         //
