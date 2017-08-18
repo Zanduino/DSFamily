@@ -464,7 +464,7 @@ uint8_t DSFamily_Class::read_bit(void) {                                      //
 ** you need power after the write (e.g. DS18S20 in parasite power mode) then set 'power' to 1, otherwise the pin  **
 ** will go tri-state at the end of the write to avoid heating in a short or other mishap.                         **
 *******************************************************************************************************************/
-void DSFamily_Class::write_byte(uint8_t v, uint8_t ) {                        //                                  //
+void DSFamily_Class::write_byte(uint8_t v, uint8_t power) {                   //                                  //
   uint8_t bitMask;                                                            // Bit mask                         //
   for (bitMask = 0x01; bitMask; bitMask <<= 1) write_bit( (bitMask & v)?1:0); // Write bits until empty           //
   if ( !power) {                                                              // Set pin in parasite mode         //
