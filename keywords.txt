@@ -10,22 +10,22 @@ DSFamily_Class	KEYWORD1
 ####################################
 # Methods and Functions (KEYWORD2) #
 ####################################
-ScanForDevices			KEYWORD2
-ReadDeviceTemp			KEYWORD2
-DeviceStartConvert		KEYWORD2
-Calibrate 				KEYWORD2
+ScanForDevices	KEYWORD2
+ReadDeviceTemp	KEYWORD2
+DeviceStartConvert	KEYWORD2
+Calibrate 	KEYWORD2
 GetDeviceCalibration    KEYWORD2
 SetDeviceCalibration    KEYWORD2
-MinTemperature   		KEYWORD2
-MaxTemperature    		KEYWORD2
-AvgTemperature    		KEYWORD2
+MinTemperature   	KEYWORD2
+MaxTemperature    	KEYWORD2
+AvgTemperature    	KEYWORD2
 StdDevTemperature    	KEYWORD2
-GetDeviceResolution		KEYWORD2
-SetDeviceResolution		KEYWORD2
-GetDeviceROM			KEYWORD2
-crc8					KEYWORD2
+GetDeviceResolution	KEYWORD2
+SetDeviceResolution	KEYWORD2
+GetDeviceROM	KEYWORD2
+crc8	KEYWORD2
 ThermometersFound    	KEYWORD2
-Parasitic				KEYWORD2
+Parasitic	KEYWORD2
 ConversionMillis    	KEYWORD2
 
 ########################
