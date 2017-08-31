@@ -17,14 +17,13 @@
 ** GNU General Public License for more details. You should have received a copy of the GNU General Public License **
 ** along with this program.  If not, see <http://www.gnu.org/licenses/>.                                          **
 **                                                                                                                **
-** Vers.  Date       Developer           Comments                                                                 **
-** ====== ========== =================== ======================================================================== **
-** 1.0.1  2017-07-14 Arnd@SV-Zanshin.Com Removed calibration references in program as they are unused             **
-** 1.0.0  2016-11-30 Arnd@SV-Zanshin.Com Initial coding                                                           **
+** Vers.  Date       Developer                     Comments                                                       **
+** ====== ========== ============================= ============================================================== **
+** 1.0.1  2017-07-14 https://github.com/SV-Zanshin Removed calibration references in program as they are unused   **
+** 1.0.0  2016-11-30 https://github.com/SV-Zanshin Initial coding                                                 **
 **                                                                                                                **
 *******************************************************************************************************************/
 #include <DSFamily.h>                                                         // DS Thermometers calls and methods//
-
 /*******************************************************************************************************************
 ** Declare all program constants                                                                                  **
 *******************************************************************************************************************/
@@ -34,7 +33,6 @@ const uint16_t SERIAL_BAUD_RATE       =        115200;                        //
 const uint8_t  ONE_WIRE_PIN           =             5;                        // 1-Wire attached to PIN 5         //
 const float    DS_DEGREES             =        0.0625;                        // Degrees per DS unit              //
 const uint8_t  SPRINTF_BUFFER_SIZE    =            64;                        // Maximum single sprintf() buffer  //
-
 /*******************************************************************************************************************
 ** Declare global variables and instantiate classes                                                               **
 *******************************************************************************************************************/
@@ -42,7 +40,6 @@ uint8_t        thermometers = 0;                                              //
 char           buffer[SPRINTF_BUFFER_SIZE];                                   // buffer for sprintf() calls       //
 uint8_t        ROMBuffer[8];                                                  // Holds unique address of device   //
 DSFamily_Class DSFamily(ONE_WIRE_PIN,128);                                    // Start DSFamily, reserve 128Bytes //
-
 /*******************************************************************************************************************
 ** Method Setup(). This is an Arduino IDE method which is called upon boot or restart. It is only called one time **
 ** and then control goes to the main loop, which loop indefinately.                                               **
