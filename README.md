@@ -48,4 +48,6 @@ to make this library useable without having to download other libraries or compo
 
 Details are available at the [GitHub DSFamily Wiki](https://github.com/SV-Zanshin/DSFamily/wiki)
 
+[![DOI](https://www.zenodo.org/badge/75320780.svg)](https://www.zenodo.org/badge/latestdoi/75320780)
+
 ![Zanshin Logo](https://www.sv-zanshin.com/r/images/site/gif/zanshinkanjitiny.gif) <img src="https://www.sv-zanshin.com/r/images/site/gif/zanshintext.gif" width="75"/>
