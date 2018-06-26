@@ -42,16 +42,18 @@
 ** GNU General Public License for more details. You should have received a copy of the GNU General Public License **
 ** along with this program.  If not, see <http://www.gnu.org/licenses/>.                                          **
 **                                                                                                                **
-** Vers.  Date       Developer                         Comments                                                   **
-** ====== ========== ================================= ========================================================== **
+** Vers.  Date       Developer                     Comments                                                       **
+** ====== ========== ============================= ============================================================== **
+** 1.0.7  2018-06-26 https://github.com/SV-Zanshin Packaging changes                                              **
+** 1.0.6  2018-06-25 https://github.com/SV-Zanshin Documentation changes                                          **
 ** 1.0.5  2017-07-31 https://github.com/SV-Zanshin Only function prototypes may have default values as this       **
-**                                                     may cause compiler errors.                                 **
+**                                                 may cause compiler errors.                                     **
 ** 1.0.4  2016-12-29 https://github.com/SV-Zanshin Added error loop to Read1WireScratchpad(), corrected           **
-**                                                     DS18S20 call in ReadDeviceTemp() to avoid false temps      **
+**                                                 DS18S20 call in ReadDeviceTemp() to avoid false temps          **
 ** 1.0.3  2016-12-16 https://github.com/SV-Zanshin Added optional CalibrationTemp to Calibrate function           **
 ** 1.0.2  2016-12-03 https://github.com/SV-Zanshin Added optional ReadDeviceTemp "WaitSwitch", minimized waits    **
 ** 1.0.1  2016-12-02 https://github.com/SV-Zanshin Added delays for ReadDeviceTemp() and when a parasitic         **
-**                                                     device is present                                          **
+**                                                 device is present                                              **
 ** 1.0.0  2016-12-01 https://github.com/SV-Zanshin Initial release                                                **
 ** 1.0.b5 2016-11-30 https://github.com/SV-Zanshin Moved 1-Wire calls to private, refactored some of the calls    **
 ** 1.0.b4 2016-11-29 https://github.com/SV-Zanshin Included sections of the 1-Wire library, see above             **
@@ -132,7 +134,7 @@
       ~DSFamily_Class();                                                      // Class destructor                 //
       uint8_t  ThermometersFound = 0;                                         // Number of Devices  discovered    //
       uint16_t ConversionMillis;                                              // Current conversion milliseconds  //
-      bool     Parasitic = true;                                              // If one or more parasitic devices //
+      bool     Parasitic         = true;                                      // If one or more parasitic devices //
       uint8_t  ScanForDevices      ();                                        // Scan/rescan the 1-Wire microLAN  //
       int16_t  ReadDeviceTemp      (const uint8_t deviceNumber,               // Return the temperature           //
                                     const bool raw=false);                    // optionally using the raw value   //
