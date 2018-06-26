@@ -2,27 +2,28 @@
 ** Class definition header for the DSFamily class. Defines the methods and variables in the class                 **
 **                                                                                                                **
 ** The goal of this class is to simplify using multiple DSFamily 1-Wire thermometers from an Arduino. Particularly**
-** when the number of attached devices is unkown, quite a bit of valuable variable memory is consumed when        **
+** when the number of attached devices is unknown, quite a bit of valuable variable memory is consumed when       **
 ** allocating an array of {n} times the 8 Byte (64bit) Unique address; e.g. 128Bytes of storage would normally    **
 ** be reserved if there can be up to 16 1-Wire devices.                                                           **
 **                                                                                                                **
 ** This class stores this address information at the end of the EEPROM memory, optionally reserving space at the  **
 ** beginning of EEPROM for other applications. Thus the maximum number of devices that can be processed depends   **
 ** upon the space reserved and the space available on the given Atmel processor. While the number of write-cycles **
-** to EEPROM should be limited to 10,000; the order of the 1-Wire devices is deterministics and the EEPROM.h      **
+** to EEPROM should be limited to 10,000; the order of the 1-Wire devices is deterministic and the EEPROM.h       **
 ** library calls will check to make sure that no writes are performed if the data hasn't changed, so using EEPROM **
-** for this functionality is not an issue as few, if any, writes are done after the program has been run.         **
+** for this functionality is not an issue as few, if any, writes are done after the program has been run with a   **
+** given configuration.                                                                                           **
 **                                                                                                                **
 ** Access to the devices is done with an index number rather than the 64-Bit unique address, simplifying using    **
 ** the device. Several methods are built into the library to simplify basic operations on multiple thermometers,  **
-** including allowing one of the thermometer reading to be ignored - important if one of the devices is placed    **
+** including allowing one of the thermometer readings to be ignored - important if one of the devices is placed   **
 ** elsewhere - i.e. one thermometer is on the board to measure ambient temperature, or one thermometer is placed  **
 ** directly on the evaporator plate in a refrigerator or freezer and is thus much colder than the others.         **
 **                                                                                                                **
 ** While the DS Family of thermometers are quite accurate, there can still be significant variations between      **
 ** readings. The class contains a calibration routine which assumes that all of the devices are at the same       **
-** temperature and will use the 2 User-definable bytes to store offset calibration information which ensures a    **
-** significant improvement in accuracy.                                                                           **
+** temperature and will use the DS-Family's 2 User-definable bytes to store offset calibration information which  **
+** ensures a significant improvement in accuracy.                                                                 **
 **                                                                                                                **
 ** The Maxim DSFamily of thermometers use the 1-Wire microLAN protocol. There is an excellent library for 1-Wire, **
 ** written by Paul Stoffregen and located at http://www.pjrc.com/teensy/td_libs_OneWire.html. There is also an    **
@@ -35,6 +36,8 @@
 ** so both my comments and variable names tend to be verbose. The code is written to fit in the first 80 spaces   **
 ** and the comments start after that and go to column 117 - allowing the code to be printed in A4 landscape mode. **
 **                                                                                                                **
+** GNU General Public License                                                                                     **
+** ==========================                                                                                     **
 ** This program is free software: you can redistribute it and/or modify it under the terms of the GNU General     **
 ** Public License as published by the Free Software Foundation, either version 3 of the License, or (at your      **
 ** option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY     **
@@ -44,7 +47,7 @@
 **                                                                                                                **
 ** Vers.  Date       Developer                     Comments                                                       **
 ** ====== ========== ============================= ============================================================== **
-** 1.0.7  2018-06-26 https://github.com/SV-Zanshin Packaging changes                                              **
+** 1.0.7  2018-06-26 https://github.com/SV-Zanshin Packaging  and documentation changes, optimiyed EEPROM         **
 ** 1.0.6  2018-06-25 https://github.com/SV-Zanshin Documentation changes                                          **
 ** 1.0.5  2017-07-31 https://github.com/SV-Zanshin Only function prototypes may have default values as this       **
 **                                                 may cause compiler errors.                                     **
@@ -63,7 +66,7 @@
 *******************************************************************************************************************/
 #include "Arduino.h"                                                          // Arduino data type definitions    //
 #include <EEPROM.h>                                                           // Access the EEPROM memory         //
-#include <inttypes.h>                                                         // Integral type definitions        //
+//#include <inttypes.h>                                                         // Integral type definitions        //
 #if ARDUINO >= 100                                                            // Include depending on version     //
   #include "Arduino.h"                                                        // delayMicroseconds,               //
 #else                                                                         // digitalPinToBitMask, etc.        //
