@@ -1,5 +1,6 @@
 /*******************************************************************************************************************
-** Class definition header for the DSFamily class. Defines the methods and variables in the class                 **
+** Class definition for the DSFamily class, see the class header for detailed comments as well as current version **
+** information. This file defines the methods and variables in the class                                          **
 **                                                                                                                **
 ** This program is free software: you can redistribute it and/or modify it under the terms of the GNU General     **
 ** Public License as published by the Free Software Foundation, either version 3 of the License, or (at your      **
@@ -26,7 +27,7 @@ const uint8_t  DS_COPY_SCRATCHPAD      =   0x48;                              //
 const uint8_t  DS_SKIP_ROM             =   0xCC;                              // Skip the ROM address on 1-Wire   //
 const uint8_t  DS_SELECT_ROM           =   0x55;                              // Select the ROM address on 1-Wire //
 const uint8_t  DS_SEARCH               =   0xF0;                              // Search the 1-Wire for devices    //
-const int16_t  DS_BAD_TEMPERATURE      = 0xFC90;                              // Bad measurement value, -55캜     //
+const int16_t  DS_BAD_TEMPERATURE      = 0xFC90;                              // Bad measurement value, -55째C     //
 const uint8_t  DS_MAX_NV_CYCLE_TIME    =    100;                              // Max ms taken to write NV memory  //
 const uint8_t  DS_USER_BYTE_1          =      2;                              // The 2nd scratchpad byte          //
 const uint8_t  DS_USER_BYTE_2          =      3;                              // The 3rd scratchpad byte          //
@@ -107,7 +108,7 @@ boolean DSFamily_Class::Read1WireScratchpad(const uint8_t deviceNumber,       //
 
 /*******************************************************************************************************************
 ** method ReadDeviceTemp() to return the current temperature value for a given device number. All devices except  **
-** the DS18S20 return raw values in 0.0625캜 increments, so the 0.5캜 increments of the DS18S20 are converted to  **
+** the DS18S20 return raw values in 0.0625째C increments, so the 0.5째C increments of the DS18S20 are converted to  **
 ** the same scale as the other devices. A check is done to see if there are still conversion(s) being done and a  **
 ** delay is made until any conversions have time to complete. We only store ony value for conversion start time,  **
 ** so the delay might be for another devices and might not be necessary, but the alternative is to store the      **
@@ -303,10 +304,10 @@ int16_t DSFamily_Class::AvgTemperature(const uint8_t skipDeviceNumber){       //
 ** set to the same resolution                                                                                     **
 ** Value Resolution Conversion                                                                                    **
 ** ===== ========== ==========                                                                                    **
-**     9  0.5캜      93.75ms                                                                                      **
-**    10  0.25캜    187.5 ms                                                                                      **
-**    11  0.125캜   375   ms                                                                                      **
-**    12  0.0625캜  750   ms                                                                                      **
+**     9  0.5째C      93.75ms                                                                                      **
+**    10  0.25째C    187.5 ms                                                                                      **
+**    11  0.125째C   375   ms                                                                                      **
+**    12  0.0625째C  750   ms                                                                                      **
 *******************************************************************************************************************/
 void DSFamily_Class::SetDeviceResolution(const uint8_t deviceNumber,          // Set resolution to 9,10,11 or 12 b//
                                   uint8_t resolution) {                       //                                  //
