@@ -3,7 +3,10 @@
 attached devices is not known at design time. Each 1-Wire device has a unique 8 Byte ROM code which is used to address the device, so keeping 16 device addresses in memory can use a significant amount of available
 RAM. This library uses the available Atmel EEPROM memory to store the 8-Byte addresses and reference to the devices is done via an integer index rather than device number.
 
-## Supported Devices
+## Supported Arduino hardware
+Due to the use of EEPROM to store the 1-Wire DS thermometer information at runtime, currently only the AVR-Family of processors are supported. Work is ongoing to support the ESP32 and ESP8266 plaforms which have EEPROM emulation. If enough interest is present, a solution for the other common platforms can be implemented using "normal" memory.
+
+## Supported Maxim DS-Devices
 The following Maxim Integrated DS-Family 1-Wire thermometers are supported:
 
 <table>
