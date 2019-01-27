@@ -43,7 +43,7 @@ Version | Date       | Developer                     | Comments
 /*******************************************************************************************************************
 ** Declare all program constants                                                                                  **
 *******************************************************************************************************************/
-const uint32_t SERIAL_BAUD_RATE       = 115200; ///< Serial communication baud rate
+const uint32_t SERIAL_SPEED           = 115200; ///< Serial communication baud rate
 const uint8_t  ONE_WIRE_PIN           =      5; ///< 1-Wire attached to PIN 5
 const uint8_t  CALIBRATION_ITERATIONS =     30; ///< Number of iterations to run
 const float    DS_DEGREES             = 0.0625; ///< Degrees per DS unit
