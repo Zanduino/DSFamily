@@ -416,7 +416,7 @@ int16_t DSFamily_Class::AvgTemperature(const uint8_t skipDeviceNumber)
 *    11  0.125°C   375   ms\n
 *    12  0.0625°C  750   ms
 * @param[in] deviceNumber 1-Wire device number
-* @param]in] resolution Device resolution in bits: 9, 10, 11 or 12
+* @param[in] resolution Device resolution in bits: 9, 10, 11 or 12
 */
 void DSFamily_Class::SetDeviceResolution(const uint8_t deviceNumber, uint8_t resolution)
 {
