@@ -1,4 +1,4 @@
-# DS-Family library
+# DS-Family library [![Build Status](https://travis-ci.org/SV-Zanshin/DSFamily.svg?branch=master)](https://travis-ci.org/SV-Zanshin/DSFamily) [![DOI](https://www.zenodo.org/badge/75320780.svg)](https://www.zenodo.org/badge/latestdoi/75320780)
 <img src="https://github.com/SV-Zanshin/DSFamily/blob/master/Images/DS18B20.jpg" width="175" align="right"/> *Arduino* library for using any/all of the "DS" Family of Maxim Integrated 1-Wire thermometers.  This library is specifically geared towards installations with several devices, particularly where the number of
 attached devices is not known at design time. Each 1-Wire device has a unique 8 Byte ROM code which is used to address the device, so keeping 16 device addresses in memory can use a significant amount of available
 RAM. This library uses the available Atmel EEPROM memory to store the 8-Byte addresses and reference to the devices is done via an integer index rather than device number.
@@ -50,7 +50,5 @@ There is also an informative page at http://playground.arduino.cc/Learning/OneWi
 to make this library useable without having to download other libraries or components, the code from version 2.0 (extracted 2016-11-23), has been included.
 
 Details are available at the [GitHub DSFamily Wiki](https://github.com/SV-Zanshin/DSFamily/wiki)
-
-[![DOI](https://www.zenodo.org/badge/75320780.svg)](https://www.zenodo.org/badge/latestdoi/75320780)
 
 ![Zanshin Logo](https://www.sv-zanshin.com/r/images/site/gif/zanshinkanjitiny.gif) <img src="https://www.sv-zanshin.com/r/images/site/gif/zanshintext.gif" width="75"/>
