@@ -50,8 +50,6 @@ Written by Arnd\@SV-Zanshin
 
 Version| Date       | Developer                     | Comments
 ------ | ---------- | ----------------------------- | --------
-1.0.5  | 2019-01-26 | https://github.com/SV-Zanshin | Issue #4 - converted documentation to doxygen
-
 1.0.8  | 2019-01-27 | https://github.com/SV-Zanshin | Issue #4 - Convert to  Doxygen format
 1.0.7  | 2018-06-26 | https://github.com/SV-Zanshin | Packaging  and documentation changes, optimized EEPROM
 1.0.6   |2018-06-25 | https://github.com/SV-Zanshin | Documentation changes
