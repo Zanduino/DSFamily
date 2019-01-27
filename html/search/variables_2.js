@@ -12,7 +12,7 @@ var searchData=
   ['ds_5fbad_5ftemperature',['DS_BAD_TEMPERATURE',['../_d_s_family_8cpp.html#a2cc6a9f1c4adcfbe8c74dc81d2e657ad',1,'DSFamily.cpp']]],
   ['ds_5fconfig_5fbyte',['DS_CONFIG_BYTE',['../_d_s_family_8cpp.html#a8b29b43592c6237763b82c5619d00b76',1,'DSFamily.cpp']]],
   ['ds_5fcopy_5fscratchpad',['DS_COPY_SCRATCHPAD',['../_d_s_family_8cpp.html#a9f83d7966cdcb61be454de560f354b12',1,'DSFamily.cpp']]],
-  ['ds_5fdegrees',['DS_DEGREES',['../_general_8ino.html#adbbb1d79ce6ea74bc95c13ae7bf76748',1,'General.ino']]],
+  ['ds_5fdegrees',['DS_DEGREES',['../_calibration_8ino.html#adbbb1d79ce6ea74bc95c13ae7bf76748',1,'DS_DEGREES():&#160;Calibration.ino'],['../_general_8ino.html#adbbb1d79ce6ea74bc95c13ae7bf76748',1,'DS_DEGREES():&#160;General.ino']]],
   ['ds_5fmax_5fnv_5fcycle_5ftime',['DS_MAX_NV_CYCLE_TIME',['../_d_s_family_8cpp.html#a4cc385f8b92b9e72c618f03db4c036e7',1,'DSFamily.cpp']]],
   ['ds_5fread_5fpower_5fsupply',['DS_READ_POWER_SUPPLY',['../_d_s_family_8cpp.html#a73a5a3b547d16b14879cb4831cb6ffdb',1,'DSFamily.cpp']]],
   ['ds_5fread_5fscratchpad',['DS_READ_SCRATCHPAD',['../_d_s_family_8cpp.html#ad02e2fbe7f60ae188a6b421fc1a18416',1,'DSFamily.cpp']]],
@@ -23,5 +23,5 @@ var searchData=
   ['ds_5fuser_5fbyte_5f1',['DS_USER_BYTE_1',['../_d_s_family_8cpp.html#a6992232a7b6da5a2de5f8117b7ab3923',1,'DSFamily.cpp']]],
   ['ds_5fuser_5fbyte_5f2',['DS_USER_BYTE_2',['../_d_s_family_8cpp.html#a09aab4adf6b6d72d88f5de97c51e052c',1,'DSFamily.cpp']]],
   ['ds_5fwrite_5fscratchpad',['DS_WRITE_SCRATCHPAD',['../_d_s_family_8cpp.html#a70ad46c2476fcfc9edc47bfd968d1775',1,'DSFamily.cpp']]],
-  ['dsfamily',['DSFamily',['../_general_8ino.html#a2c46a3ba86970aa4fddf9875e1c16807',1,'General.ino']]]
+  ['dsfamily',['DSFamily',['../_calibration_8ino.html#a2c46a3ba86970aa4fddf9875e1c16807',1,'DSFamily():&#160;Calibration.ino'],['../_general_8ino.html#a2c46a3ba86970aa4fddf9875e1c16807',1,'DSFamily():&#160;General.ino']]]
 ];
