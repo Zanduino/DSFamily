@@ -66,7 +66,6 @@
 *******************************************************************************************************************/
 #include "Arduino.h"                                                          // Arduino data type definitions    //
 #include <EEPROM.h>                                                           // Access the EEPROM memory         //
-//#include <inttypes.h>                                                         // Integral type definitions        //
 #if ARDUINO >= 100                                                            // Include depending on version     //
   #include "Arduino.h"                                                        // delayMicroseconds,               //
 #else                                                                         // digitalPinToBitMask, etc.        //

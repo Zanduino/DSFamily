@@ -128,7 +128,7 @@ int16_t DSFamily_Class::ReadDeviceTemp(const uint8_t deviceNumber,            //
       temperature = ((dsBuffer[1] << 8) | dsBuffer[0])<<3;                    // get the raw reading and apply    //
       temperature = (temperature & 0xFFF0) + 12 - dsBuffer[6];                // value from "count remain" byte   //
     } else temperature = (dsBuffer[1]<<8)|dsBuffer[0];                        // Results come in 2s complement    //
-    if (dsBuffer[2]^dsBuffer[3] == 0xFF &&                                    // Apply any calibration offset     //
+    if ((dsBuffer[2]^dsBuffer[3]) == 0xFF &&                                  // Apply any calibration offset     //
         !raw) temperature += (int8_t)dsBuffer[2];                             // if raw is not true               //
   } // of if-then the read was successful                                     // of if-then-else the DS18x20 read //
   return(temperature);                                                        // Return our computed reading      //
@@ -151,8 +151,16 @@ void DSFamily_Class::DeviceStartConvert(const uint8_t deviceNumber,           //
   _ConvStartTime = millis();                                                  // Store start time of conversion   //
   _LastCommandWasConvert = true;                                              // Set switch to true               //
   if (WaitSwitch)                                                             // Don't return until finished      //
-    if (Parasitic) ParasiticWait();                                           // wait a fixed period when parasite//
-    else while(read_bit()==0);                                                // Read bit goes high when finished //
+  {
+    if (Parasitic)
+    {
+      ParasiticWait();                                           // wait a fixed period when parasite//
+    }
+    else
+    {
+      while (read_bit() == 0);                                                // Read bit goes high when finished //
+    } // if-then-else Parasitic
+  } // if-then Waitswitch set
 } // of method DeviceStartConvert                                             //----------------------------------//
 
 /*******************************************************************************************************************
@@ -225,7 +233,7 @@ int8_t DSFamily_Class::GetDeviceCalibration(const uint8_t deviceNumber) {     //
   uint8_t dsBuffer[9];                                                        // Temporary scratchpad buffer      //
   _LastCommandWasConvert = false;                                             // Set switch to false              //
   Read1WireScratchpad(deviceNumber,dsBuffer);                                 // Read from the device scratchpad  //
-  if (dsBuffer[2]^dsBuffer[3]==0xFF) offset = (int8_t)dsBuffer[2];            // Use the calibration value        //
+  if ((dsBuffer[2]^dsBuffer[3])==0xFF) offset = (int8_t)dsBuffer[2];          // Use the calibration value        //
   return (offset);                                                            // Return the computed offset       //
 } // of method GetDeviceCalibration()                                         //----------------------------------//
 
@@ -288,7 +296,6 @@ int16_t DSFamily_Class::MaxTemperature(uint8_t skipDeviceNumber) {            //
 *******************************************************************************************************************/
 int16_t DSFamily_Class::AvgTemperature(const uint8_t skipDeviceNumber){       // Average temperature of devices//
   int16_t AverageTemp = 0;                                                    // return value starts at 0         //
-  int16_t deviceTemp;                                                         // store temperature for comparison //
   for (uint8_t i=0;i<ThermometersFound;i++) {                                 // loop through each thermometer    //
     if (i!=skipDeviceNumber) AverageTemp += ReadDeviceTemp(i);                // add temperature to the sum       //
   } // of for-next each thermometer                                           //                                  //
