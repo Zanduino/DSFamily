@@ -57,7 +57,6 @@ char           buffer[SPRINTF_BUFFER_SIZE]; ///< buffer for sprintf() calls
 uint8_t        ROMBuffer[8];                ///< Holds unique address of device
 DSFamily_Class DSFamily(ONE_WIRE_PIN,128);  ///< Start DSFamily, reserve 128 Bytes
 
-
 /*!
     @brief    Arduino method called once at startup to initialize the system
     @details  This is an Arduino IDE method which is called first upon boot or restart. It is only called one time
