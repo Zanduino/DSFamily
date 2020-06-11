@@ -52,4 +52,4 @@ to make this library useable without having to download other libraries or compo
 ## Documentation
 In addition to the [GitHub DSFamily Wiki](https://github.com/SV-Zanshin/DSFamily/wiki), the library and example programs utiliez Doxygen documentation, whose output can be found at [Doxygen Documentation](https://sv-zanshin.github.io/DSFamily/html/index.html)  
 
-![Zanshin Logo](https://www.sv-zanshin.com/r/images/site/gif/zanshinkanjitiny.gif) <img src="https://www.sv-zanshin.com/r/images/site/gif/zanshintext.gif" width="75"/>
+[![Zanshin Logo](https://zanduino.github.io/Images/zanshinkanjitiny.gif) <img src="https://zanduino.github.io/Images/zanshintext.gif" width="75"/>](https://www.sv-zanshin.com)
