@@ -1,5 +1,5 @@
 [![License: GPL v3](https://zanduino.github.io/Badges/GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Build](https://github.com/Zanduino/DSFamily/workflows/Build/badge.svg)](https://github.com/Zanduino/DSFamily/actions?query=workflow%3ABuild) [![Format](https://github.com/Zanduino/DSFamily/workflows/Format/badge.svg)](https://github.com/Zanduino/DSFamily/actions?query=workflow%3AFormat) [![Wiki](https://zanduino.github.io/Badges/Documentation-Badge.svg)](https://github.com/Zanduino/DSFamily/wiki) [![Doxygen](https://github.com/Zanduino/DSFamily/workflows/Doxygen/badge.svg)](https://Zanduino.github.io/DSFamily/html/index.html) [![arduino-library-badge](https://www.ardu-badge.com/badge/DSFamily.svg?)](https://www.ardu-badge.com/DSFamily)
-# DS-Family library<br>[![License: GPL v3]
+# DS-Family library<br>
 
 <img src="https://github.com/Zanduino/DSFamily/blob/master/Images/DS18B20.jpg" width="175" align="right"/> *Arduino* library for using any/all of the "DS" Family of Maxim Integrated 1-Wire thermometers.  This library is specifically geared towards installations with several devices, particularly where the number of
 attached devices is not known at design time. Each 1-Wire device has a unique 8 Byte ROM code which is used to address the device, so keeping 16 device addresses in memory can use a significant amount of available
