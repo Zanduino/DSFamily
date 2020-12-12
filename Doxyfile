@@ -8,7 +8,7 @@
 ######################################################################################################
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = DS-Family
-PROJECT_NUMBER         = "Version 1.0.8"
+PROJECT_NUMBER         = "Version 1.0.9"
 PROJECT_BRIEF          = "Arduino Library for the DS-Family of 1-Wire thermometers"
 PROJECT_LOGO           =
 OUTPUT_DIRECTORY       =
