@@ -658,9 +658,8 @@ uint8_t DSFamily_Class::search(uint8_t *newAddr) {
     LastDeviceFlag        = false;
     LastFamilyDiscrepancy = 0;
     search_result         = false;
-  } // of if-then no device found
-  for (int i = 0; i < 8; i++) 
-    newAddr[i] = ROM_NO[i];  // Copy result buffer
+  }                                                    // of if-then no device found
+  for (int i = 0; i < 8; i++) newAddr[i] = ROM_NO[i];  // Copy result buffer
   return search_result;
 }  // of method search()
 uint8_t DSFamily_Class::crc8(const uint8_t *addr, uint8_t len) {
