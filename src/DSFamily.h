@@ -35,14 +35,6 @@ informative page at http://playground.arduino.cc/Learning/OneWire describing how
 are parts of the code that are unnecessary for this DS implementation and in order to make this library self-
 sufficient, the code from version 2.0 (extracted 2016-11-23), has been included in this library.
 
-@section license GNU General Public License v3.0
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General
-Public License as published by the Free Software Foundation, either version 3 of the License, or (at your
-option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details. You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 @section doxygen doxygen configuration
 
 This library is built with the standard "Doxyfile", which is located at
