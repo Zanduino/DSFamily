@@ -8,10 +8,10 @@ The following 2 constants can/should be adjusted according to the 1-Wire configu
 "ONE_WIRE_PIN"           is the Arduino pin on which the data line of the 1-Wire system is attached\n
 "CALIBRATION_ITERATIONS" is the number of iterations to average temperature measurements per thermometer\n\n
 
-The precision of the DS-Family devices is programmable from 9 to 12 bits and the granularity of readings is 0.0625°C.
-Unfortunately there is a certain amount of deviation between devices so that they read slightly different 
-temperatures. The calibration process measures the average temperatures of the different devices and then assumes 
-that the average value of all readings for all thermometers is the correct value and then an offset to that ideal 
+The precision of the DS-Family devices is programmable from 9 to 12 bits and the granularity of readings is 0.0625ï¿½C.
+Unfortunately there is a certain amount of deviation between devices so that they read slightly different
+temperatures. The calibration process measures the average temperatures of the different devices and then assumes
+that the average value of all readings for all thermometers is the correct value and then an offset to that ideal
 temperature is computed.\n\n
 
 Each DS-Family thermometer has 2 user bytes available for reading/writing. These two bytes can be used for high and
@@ -34,10 +34,10 @@ Written by Arnd\@SV-Zanshin
 
 @section Calibrationversions Changelog
 
-Version | Date       | Developer                     | Comments
-------- | ---------- | ----------------------------- | ---------------------------------------------------
-1.0.1   | 2019-01-27 | https://github.com/SV-Zanshin | Changed documentation to doxygen style
-1.0.0   | 2016-11-30 | https://github.com/SV-Zanshin | Initial coding
+Version | Date       | Developer   | Comments
+------- | ---------- | ----------- | ---------------------------------------------------
+1.0.1   | 2019-01-27 | SV-Zanshin | Changed documentation to doxygen style
+1.0.0   | 2016-11-30 | SV-Zanshin | Initial coding
 */
 #include <DSFamily.h> // DS Thermometers calls and methods
 /*******************************************************************************************************************
@@ -119,13 +119,13 @@ void loop()
   Serial.print(" seconds. Please Wait...");
   for(uint8_t j=0;j<CALIBRATION_ITERATIONS;j++) // loop the number of iterations
   {
-    for(uint8_t i=0;i<thermometers;i++) 
+    for(uint8_t i=0;i<thermometers;i++)
     {
       statsCAL[i] += DSFamily.ReadDeviceTemp(i);      // compute calibrated statistics
       statsRAW[i] += DSFamily.ReadDeviceTemp(i,true); // compute raw statistics
     } // of for-next each thermometer
   } // of for-next each iteration
-  for (uint8_t i=0;i<thermometers;i++) 
+  for (uint8_t i=0;i<thermometers;i++)
   {
     // Sum up the raw and calibrated data in order to compute the averages for both
     avgCAL += statsCAL[i];

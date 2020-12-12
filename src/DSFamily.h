@@ -1,3 +1,4 @@
+// clang-format off
 /*! @file DSFamily.h
 
  @mainpage Arduino Library Header to access the DS Family of 1-wire temperature sensors
@@ -10,22 +11,22 @@ allocating an array of {n} times the 8 Byte (64bit) Unique address; e.g. 128Byte
 be reserved if there can be up to 16 1-Wire devices.\n\n
 
 This class stores this address information at the end of the EEPROM memory, optionally reserving space at the
-beginning of EEPROM for other applications. Thus the maximum number of devices that can be processed depends upon 
-the space reserved and the space available on the given Atmel processor. While the number of write-cycles to 
-EEPROM should be limited to 10,000; the order of the 1-Wire devices is deterministic and the EEPROM.h library 
-calls will check to make sure that no writes are performed if the data hasn't changed, so using EEPROM for this 
-functionality is not an issue as few, if any, writes are done after the program has been run with a given 
+beginning of EEPROM for other applications. Thus the maximum number of devices that can be processed depends upon
+the space reserved and the space available on the given Atmel processor. While the number of write-cycles to
+EEPROM should be limited to 10,000; the order of the 1-Wire devices is deterministic and the EEPROM.h library
+calls will check to make sure that no writes are performed if the data hasn't changed, so using EEPROM for this
+functionality is not an issue as few, if any, writes are done after the program has been run with a given
 configuration.\n\n
 
-Access to the devices is done with an index number rather than the 64-Bit unique address, simplifying using the 
-device. Several methods are built into the library to simplify basic operations on multiple thermometers, 
+Access to the devices is done with an index number rather than the 64-Bit unique address, simplifying using the
+device. Several methods are built into the library to simplify basic operations on multiple thermometers,
 including allowing one of the thermometer readings to be ignored - important if one of the devices is placed
 elsewhere - i.e. one thermometer is on the board to measure ambient temperature, or one thermometer is placed
 directly on the evaporator plate in a refrigerator or freezer and is thus much colder than the others.\n\n
 
-While the DS Family of thermometers are quite accurate, there can still be significant variations between readings. 
-The class contains a calibration routine which assumes that all of the devices are at the same temperature and 
-will use the DS-Family's 2 User-definable bytes to store offset calibration information which ensures a significant 
+While the DS Family of thermometers are quite accurate, there can still be significant variations between readings.
+The class contains a calibration routine which assumes that all of the devices are at the same temperature and
+will use the DS-Family's 2 User-definable bytes to store offset calibration information which ensures a significant
 improvement in accuracy.\n\n
 
 The Maxim DSFamily of thermometers use the 1-Wire microLAN protocol. There is an excellent library for 1-Wire,
@@ -42,37 +43,63 @@ WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
 GNU General Public License for more details. You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+@section doxygen doxygen configuration
+
+This library is built with the standard "Doxyfile", which is located at
+https://github.com/Zanduino/Common/blob/main/Doxygen. As described on that page, there are only 5
+environment variables used, and these are set in the project's actions file, located at
+https://github.com/Zanduino/DSFamily/blob/master/.github/workflows/ci-doxygen.yml
+Edit this file and set the 5 variables -  PRETTYNAME, PROJECT_NAME, PROJECT_NUMBER, PROJECT_BRIEF
+and PROJECT_LOGO so that these values are used in the doxygen documentation.
+The local copy of the doxyfile should be in the project's root directory in order to do local
+doxygen testing, but the file is ignored on upload to GitHub.
+
+@section clang-format
+Part of the GitHub actions for CI is running every source file through "clang-format" to ensure
+that coding formatting is done the same for all files. The configuration file ".clang-format" is
+located at https://github.com/Zanduino/Common/tree/main/clang-format and this is used for CI tests
+when pushing to GitHub. The local file, if present in the root directory, is ignored when
+committing and uploading.
+
+@section license GNU General Public License v3.0
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU
+General Public License as published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version. This program is distributed in the hope that it
+will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. You should
+have received a copy of the GNU General Public License along with this program.  If not, see
+<http://www.gnu.org/licenses/>.
+
 @section author Author
 
-Written by Arnd\@SV-Zanshin
+Written by Arnd <Zanshin_Github@sv-zanshin.com> / https://www.github.com/SV-Zanshin
 
 @section versions Changelog
 
-Version| Date       | Developer                     | Comments
------- | ---------- | ----------------------------- | --------
-1.0.8  | 2019-01-27 | https://github.com/SV-Zanshin | Issue #4 - Convert to  Doxygen format
-1.0.7  | 2018-06-26 | https://github.com/SV-Zanshin | Packaging  and documentation changes, optimized EEPROM
-1.0.6   |2018-06-25 | https://github.com/SV-Zanshin | Documentation changes
-1.0.5  | 2017-07-31 | https://github.com/SV-Zanshin | Only function prototypes may have default values as this
-                                                      may cause compiler errors.
-1.0.4  | 2016-12-29 | https://github.com/SV-Zanshin | Added error loop to Read1WireScratchpad(), corrected
-                                                      DS18S20 call in ReadDeviceTemp() to avoid false temps
-1.0.3  | 2016-12-16 | https://github.com/SV-Zanshin | Added optional CalibrationTemp to Calibrate function
-1.0.2  | 2016-12-03 | https://github.com/SV-Zanshin | Added optional ReadDeviceTemp "WaitSwitch", minimized waits
-1.0.1  | 2016-12-02 | https://github.com/SV-Zanshin | Added delays for ReadDeviceTemp() and when a parasitic device
-                                                      is present
-1.0.0  | 2016-12-01 | https://github.com/SV-Zanshin | Initial release
-1.0.b5 | 2016-11-30 | https://github.com/SV-Zanshin | Moved 1-Wire calls to private, refactored some of the calls
-1.0.b4 | 2016-11-29 | https://github.com/SV-Zanshin | Included sections of the 1-Wire library, see above
-1.0.b3 | 2016-11-23 | https://github.com/SV-Zanshin | Refactored class naming DS18B20 to support multiple types
-1.0.b2 | 2016-11-14 | https://github.com/SV-Zanshin | Made ScanForDevices return the number of devices found
-1.0.b1 | 2016-11-10 | https://github.com/SV-Zanshin | Added SRAM template functions to read/write efficiently
+Version| Date       | Developer  | Comments
+------ | ---------- | ---------- | --------
+1.0.8  | 2019-01-27 | SV-Zanshin | Issue #4 - Convert to  Doxygen format
+1.0.7  | 2018-06-26 | SV-Zanshin | Packaging  and documentation changes, optimized EEPROM
+1.0.6   |2018-06-25 | SV-Zanshin | Documentation changes
+1.0.5  | 2017-07-31 | SV-Zanshin | Only function prototypes may have default values as this may cause compiler errors.
+1.0.4  | 2016-12-29 | SV-Zanshin | Added error loop to Read1WireScratchpad(), corrected DS18S20 call in ReadDeviceTemp() to avoid false temps
+1.0.3  | 2016-12-16 | SV-Zanshin | Added optional CalibrationTemp to Calibrate function
+1.0.2  | 2016-12-03 | SV-Zanshin | Added optional ReadDeviceTemp "WaitSwitch", minimized waits
+1.0.1  | 2016-12-02 | SV-Zanshin | Added delays for ReadDeviceTemp() and when a parasitic device is present
+1.0.0  | 2016-12-01 | SV-Zanshin | Initial release
+1.0.b5 | 2016-11-30 | SV-Zanshin | Moved 1-Wire calls to private, refactored some of the calls
+1.0.b4 | 2016-11-29 | SV-Zanshin | Included sections of the 1-Wire library, see above
+1.0.b3 | 2016-11-23 | SV-Zanshin | Refactored class naming DS18B20 to support multiple types
+1.0.b2 | 2016-11-14 | SV-Zanshin | Made ScanForDevices return the number of devices found
+1.0.b1 | 2016-11-10 | SV-Zanshin | Added SRAM template functions to read/write efficiently
 */
+// clang-format on
 
 #include <EEPROM.h>    // Access the AVR EEPROM memory
 #if ARDUINO >= 100     // Include depending on version
   #include "Arduino.h"
-#else                                       
+#else
   #include "WProgram.h"
   #include "pins_arduino.h" // for digitalPinToBitMask, etc.
 #endif
@@ -138,7 +165,7 @@ Version| Date       | Developer                     | Comments
 * @brief   Access the available DS-Family devices on the 1-Wire bus
 */  class DSFamily_Class
   {
-    public: 
+    public:
       DSFamily_Class(const uint8_t OneWirePin, const uint8_t ReserveRom = 0 );
       ~DSFamily_Class();
       uint16_t ConversionMillis;                                              ///< Current conversion milliseconds

@@ -7,8 +7,8 @@ This program demonstrates some of the general functionality in the DSFamily libr
 The following constant can/should be adjusted according to the 1-Wire configuration and user preferences:\n
 "ONE_WIRE_PIN"           is the Arduino pin on which the data line of the 1-Wire system is attached\n\n
 
-The precision of the DS-Family devices is programmable from 9 to 12 bits and the granularity of readings is 
-0.0625°C. All temperature readings coming back from the library are signed 16 bit numbers in increments of 
+The precision of the DS-Family devices is programmable from 9 to 12 bits and the granularity of readings is
+0.0625°C. All temperature readings coming back from the library are signed 16 bit numbers in increments of
 0.0625°C. This means if a temperature reading is "355" it equates to 21.875°C.
 
 @section Generallicense License
@@ -22,15 +22,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 @section Generalauthor Author
 
-Written by Arnd\@SV-Zanshin
+ Written by Arnd <Zanshin_Github@sv-zanshin.com> / https://www.github.com/SV-Zanshin
 
 @section Generalversions Changelog
 
-Version | Date       | Developer                     | Comments
-------- | ---------- | ----------------------------- | ---------------------------------------------------
-1.0.2   | 2019-01-27 | https://github.com/SV-Zanshin | Changed documentation to doxygen style
-1.0.1   | 2017-07-14 | https://github.com/SV-Zanshin | Removed calibration references in program as they are unused
-1.0.0   | 2016-11-30 | https://github.com/SV-Zanshin | Initial coding
+Version | Date       | Developer  | Comments
+------- | ---------- | ---------- | ---------------------------------------------------
+1.0.2   | 2019-01-27 | SV-Zanshin | Changed documentation to doxygen style
+1.0.1   | 2017-07-14 | SV-Zanshin | Removed calibration references in program as they are unused
+1.0.0   | 2016-11-30 | SV-Zanshin | Initial coding
 */
 #include <DSFamily.h> // DS Thermometers calls and methods
 /*******************************************************************************************************************
@@ -54,7 +54,7 @@ DSFamily_Class DSFamily(ONE_WIRE_PIN,128);  ///< Start DSFamily, reserve 128Byte
               and then control goes to the main "loop()" method, from which control never returns
     @return   void
 */
-void setup() 
+void setup()
 {
   Serial.begin(SERIAL_BAUD_RATE); // initiate serial I/O communications
 #ifdef  __AVR_ATmega32U4__  // If this is a 32U4 processor, then wait 3 seconds to initialize USB
@@ -79,7 +79,7 @@ void setup()
     @details  This is the main program for the Arduino IDE, it is an infinite loop and keeps on repeating.
     @return   void
 */
-void loop() 
+void loop()
 {
   int16_t temperature;
   static uint8_t precision = 12; // start with 12 bits precision
