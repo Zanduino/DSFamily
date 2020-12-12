@@ -1,8 +1,10 @@
 var NAVTREE =
 [
-  [ "DS-Family", "index.html", [
+  [ "DSFamily", "index.html", [
     [ "Arduino Library Header to access the DS Family of 1-wire temperature sensors", "index.html", [
       [ "Description", "index.html#intro_section", null ],
+      [ "doxygen configuration", "index.html#doxygen", null ],
+      [ "clang-format", "index.html#clang-format", null ],
       [ "GNU General Public License v3.0", "index.html#license", null ],
       [ "Author", "index.html#author", null ],
       [ "Changelog", "index.html#versions", null ]

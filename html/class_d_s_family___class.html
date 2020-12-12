@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>DS-Family: DSFamily_Class Class Reference</title>
+<title>DSFamily: DSFamily_Class Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,10 +28,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">DS-Family
-   &#160;<span id="projectnumber">Version 1.0.9</span>
+   <div id="projectname">DSFamily
+   &#160;<span id="projectnumber">v1.1.0</span>
    </div>
-   <div id="projectbrief">Arduino Library for the DS-Family of 1-Wire thermometers</div>
+   <div id="projectbrief">Arduino Library to ead and calibrate of of the Maxim DS-Family of 1-wire thermometers</div>
   </td>
  </tr>
  </tbody>
@@ -98,52 +98,36 @@ $(document).ready(function(){initNavTree('class_d_s_family___class.html','');});
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a3b47dc990e88b0db23a724a80bc1d1e3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#a3b47dc990e88b0db23a724a80bc1d1e3">DSFamily_Class</a> (const uint8_t OneWirePin, const uint8_t ReserveRom=0)</td></tr>
-<tr class="memdesc:a3b47dc990e88b0db23a724a80bc1d1e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class constructor.  <a href="#a3b47dc990e88b0db23a724a80bc1d1e3">More...</a><br /></td></tr>
 <tr class="separator:a3b47dc990e88b0db23a724a80bc1d1e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a951e17661c8f5fa0fee69cfe7d8123b3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#a951e17661c8f5fa0fee69cfe7d8123b3">~DSFamily_Class</a> ()</td></tr>
-<tr class="memdesc:a951e17661c8f5fa0fee69cfe7d8123b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class destructor.  <a href="#a951e17661c8f5fa0fee69cfe7d8123b3">More...</a><br /></td></tr>
 <tr class="separator:a951e17661c8f5fa0fee69cfe7d8123b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acda83469ea584a11c34fffae84928401"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#acda83469ea584a11c34fffae84928401">ScanForDevices</a> ()</td></tr>
-<tr class="memdesc:acda83469ea584a11c34fffae84928401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use the standardized 1-Wire microLAN search mechanism to discover all DS devices.  <a href="#acda83469ea584a11c34fffae84928401">More...</a><br /></td></tr>
 <tr class="separator:acda83469ea584a11c34fffae84928401"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0488fb02f2b45b1cc67e85d7aab71ae0"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#a0488fb02f2b45b1cc67e85d7aab71ae0">ReadDeviceTemp</a> (const uint8_t deviceNumber, const bool raw=false)</td></tr>
-<tr class="memdesc:a0488fb02f2b45b1cc67e85d7aab71ae0"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the current temperature value for a given device number  <a href="#a0488fb02f2b45b1cc67e85d7aab71ae0">More...</a><br /></td></tr>
 <tr class="separator:a0488fb02f2b45b1cc67e85d7aab71ae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3eaee2ce845e9f4df514b056cd76f97d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#a3eaee2ce845e9f4df514b056cd76f97d">DeviceStartConvert</a> (const uint8_t deviceNumber=UINT8_MAX, const bool WaitSwitch=false)</td></tr>
-<tr class="memdesc:a3eaee2ce845e9f4df514b056cd76f97d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the sampling and conversion on a device.  <a href="#a3eaee2ce845e9f4df514b056cd76f97d">More...</a><br /></td></tr>
 <tr class="separator:a3eaee2ce845e9f4df514b056cd76f97d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadae1e5ecc17a7a850913980f70a172d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#aadae1e5ecc17a7a850913980f70a172d">Calibrate</a> (const uint8_t iterations=30, const int16_t CalTemp=INT16_MAX)</td></tr>
-<tr class="memdesc:aadae1e5ecc17a7a850913980f70a172d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calibrate all thermometers.  <a href="#aadae1e5ecc17a7a850913980f70a172d">More...</a><br /></td></tr>
 <tr class="separator:aadae1e5ecc17a7a850913980f70a172d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2e2207651c7caa92f6ef8b57c350ce0"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#aa2e2207651c7caa92f6ef8b57c350ce0">GetDeviceCalibration</a> (const uint8_t deviceNumber)</td></tr>
-<tr class="memdesc:aa2e2207651c7caa92f6ef8b57c350ce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the calibration setting from the device.  <a href="#aa2e2207651c7caa92f6ef8b57c350ce0">More...</a><br /></td></tr>
 <tr class="separator:aa2e2207651c7caa92f6ef8b57c350ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a811e1b8780263b5d90015d620bda7d69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#a811e1b8780263b5d90015d620bda7d69">SetDeviceCalibration</a> (const uint8_t deviceNumber, const int8_t offset)</td></tr>
-<tr class="memdesc:a811e1b8780263b5d90015d620bda7d69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the user bytes 1 and 2 to the calibration computed.  <a href="#a811e1b8780263b5d90015d620bda7d69">More...</a><br /></td></tr>
 <tr class="separator:a811e1b8780263b5d90015d620bda7d69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0aac2ac44b0e02d24d859f0e1d6a8d1d"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#a0aac2ac44b0e02d24d859f0e1d6a8d1d">MinTemperature</a> (const uint8_t skipDeviceNumber=UINT8_MAX)</td></tr>
-<tr class="memdesc:a0aac2ac44b0e02d24d859f0e1d6a8d1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads all current device temperatures and returns the lowest value  <a href="#a0aac2ac44b0e02d24d859f0e1d6a8d1d">More...</a><br /></td></tr>
 <tr class="separator:a0aac2ac44b0e02d24d859f0e1d6a8d1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8e1a6c7a8ee0fd4be886ebcd845032a"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#ad8e1a6c7a8ee0fd4be886ebcd845032a">MaxTemperature</a> (const uint8_t skipDeviceNumber=UINT8_MAX)</td></tr>
-<tr class="memdesc:ad8e1a6c7a8ee0fd4be886ebcd845032a"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads all current device temperatures and returns the highest value  <a href="#ad8e1a6c7a8ee0fd4be886ebcd845032a">More...</a><br /></td></tr>
 <tr class="separator:ad8e1a6c7a8ee0fd4be886ebcd845032a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab4c56c74327f2063f301fd3856cfce8"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#aab4c56c74327f2063f301fd3856cfce8">AvgTemperature</a> (const uint8_t skipDeviceNumber=UINT8_MAX)</td></tr>
-<tr class="memdesc:aab4c56c74327f2063f301fd3856cfce8"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads all current device temperatures and returns the average value  <a href="#aab4c56c74327f2063f301fd3856cfce8">More...</a><br /></td></tr>
 <tr class="separator:aab4c56c74327f2063f301fd3856cfce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add705b4c09d585c59215184dd25aabbc"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#add705b4c09d585c59215184dd25aabbc">StdDevTemperature</a> (const uint8_t skipDeviceNumber=UINT8_MAX)</td></tr>
-<tr class="memdesc:add705b4c09d585c59215184dd25aabbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads all current device temperatures and returns the standard deviation  <a href="#add705b4c09d585c59215184dd25aabbc">More...</a><br /></td></tr>
 <tr class="separator:add705b4c09d585c59215184dd25aabbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e141ce9dfb969fdfc931251936ce419"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#a6e141ce9dfb969fdfc931251936ce419">SetDeviceResolution</a> (const uint8_t deviceNumber, uint8_t resolution)</td></tr>
-<tr class="memdesc:a6e141ce9dfb969fdfc931251936ce419"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the resolution of the DS devices to 9, 10, 11 or 12 bits  <a href="#a6e141ce9dfb969fdfc931251936ce419">More...</a><br /></td></tr>
 <tr class="separator:a6e141ce9dfb969fdfc931251936ce419"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a688491d6d341c83c17d876e12ff53ccd"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#a688491d6d341c83c17d876e12ff53ccd">GetDeviceResolution</a> (const uint8_t deviceNumber)</td></tr>
-<tr class="memdesc:a688491d6d341c83c17d876e12ff53ccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the device resolution.  <a href="#a688491d6d341c83c17d876e12ff53ccd">More...</a><br /></td></tr>
 <tr class="separator:a688491d6d341c83c17d876e12ff53ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89db502d5cfee99073774a00bb2eb8bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#a89db502d5cfee99073774a00bb2eb8bc">GetDeviceROM</a> (const uint8_t deviceNumber, uint8_t <a class="el" href="_general_8ino.html#a57e5a70253e3fc038978b0ecf753899e">ROMBuffer</a>[8])</td></tr>
-<tr class="memdesc:a89db502d5cfee99073774a00bb2eb8bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the 8-byte ROM address buffer  <a href="#a89db502d5cfee99073774a00bb2eb8bc">More...</a><br /></td></tr>
 <tr class="separator:a89db502d5cfee99073774a00bb2eb8bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d4c56350e5474677fa54beaad344887"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d_s_family___class.html#a7d4c56350e5474677fa54beaad344887">crc8</a> (const uint8_t *addr, uint8_t len)</td></tr>
-<tr class="memdesc:a7d4c56350e5474677fa54beaad344887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the 8 bit crc of the returned buffer.  <a href="#a7d4c56350e5474677fa54beaad344887">More...</a><br /></td></tr>
 <tr class="separator:a7d4c56350e5474677fa54beaad344887"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -189,12 +173,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Class constructor. </p>
+<p>Class constructor</p>
 <p>Class Constructor instantiates the class and uses the initializer list to also instantiate the 1-Wire microLAN on the defined pin and to set the maximum number of thermometers that the system can store in EEPROM. The latter is dynamic because it depends upon which Atmel processor is being used, as each one has different amount of EEPROM space available </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">OneWirePin</td><td>1-Wire microLAN pin number </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ReserveRom</td><td>(Optional) Number of bytes of ROM space to reserve, used to calculate _MaxThermometers </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ReserveRom</td><td>(Optional) Number of bytes of ROM space to reserve, used to calculate _MaxThermometers</td></tr>
   </table>
   </dd>
 </dl>
@@ -215,9 +198,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Class destructor. </p>
-<p>Currently empty and unused </p>
+<p>Class destructor</p>
+<p>Currently empty and unused</p>
 
 </div>
 </div>
@@ -237,15 +219,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>reads all current device temperatures and returns the average value </p>
+<p>reads all current device temperatures and returns the average value</p>
 <p>If the optional skipDeviceNumber is specified then that device number is skipped; this is used when one of the thermometers is out-of-band - i.e. if it is attached to a heat source or evaporator plate and reads much lower or higher than the others. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">skipDeviceNumber</td><td>Device number to skip, defaults to no skipped device </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Maximum temperature </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Average temperature</dd></dl>
 
 </div>
 </div>
@@ -274,8 +255,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Calibrate all thermometers. </p>
+<p>Calibrate all thermometers</p>
 <p>Each DS has a persistent 2 user bytes which can be both read and updated. These can be used for triggering alarms, but in this application we are going to set these to provide a calibration offset value so that all DS devices on the 1-wire can be set to accurately show the same temperature. This only works when all of the thermometers are at the same temperature, which can be done by various methods. What temperature is used for the calibration is unimportant, although a calibration at typical operating temperatures makes the most sense.<br />
 <br />
  The calibration method used here is quite simple and straightforward. First, all devices are measured for a period of time defined in MEASUREMENT_ITERATIONS. The average of all readings is computed and that value is assumed to be the correct and accurate temperature reading. Each thermometer's offset to this standard value is computed and is written to the two user bytes.<br />
@@ -285,7 +265,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
  The CalTemp optional parameter specifies the calibration temperature that all thermometers are to be adjusted to. This temperature is a signed integer in hectodegrees Celsius, so a temperature of "28.12" would be "2812". </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">iterations</td><td>Number of calibration iterations to perform. The higher the value the more accurate the calibration is. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">CalTemp</td><td>(Optional) When specified, the given temperature is assumed to be the correct one and all thermometers are calibrated to that temperature, otherwise the average reading is used as the calibrated temperature completed </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">CalTemp</td><td>(Optional) When specified, the given temperature is assumed to be the correct one and all thermometers are calibrated to that temperature, otherwise the average reading is used as the calibrated temperature completed</td></tr>
   </table>
   </dd>
 </dl>
@@ -317,8 +297,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Compute the 8 bit crc of the returned buffer. </p>
+<p>Compute the 8 bit crc of the returned buffer</p>
 <p>This method uses the iterative method, which is slower than the default 1-Wire table lookup but that uses 255 bytes of scant program memory. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">addr</td><td>Pointer to buffer </td></tr>
@@ -326,7 +305,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>computed crc8 </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>computed crc8</dd></dl>
 
 </div>
 </div>
@@ -355,12 +334,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Start the sampling and conversion on a device. </p>
+<p>Start the sampling and conversion on a device</p>
 <p>At maximum resolution this conversion can take 750ms. If the optional deviceNumber is not specified then all device conversions are started at the same time. If the optional WaitSwitch parameter is set to "true" then call doesn't return until the conversion has completed </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">deviceNumber</td><td>1-Wire device number </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">WaitSwitch</td><td>(Optional, default "false"). When "true" the call doesn't return until measurements have completed </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">WaitSwitch</td><td>(Optional, default "false"). When "true" the call doesn't return until measurements have completed</td></tr>
   </table>
   </dd>
 </dl>
@@ -382,15 +360,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Return the calibration setting from the device. </p>
+<p>Return the calibration setting from the device</p>
 <p>If the calibration register 1 is equal to the XOR value of register 2 then it is assumed that a valid calibration has been set and that is returned </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">deviceNumber</td><td>1-Wire device number </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>calibration offset. If the calibration offset is invalid then INT8_MIN is returned </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>calibration offset. If the calibration offset is invalid then INT8_MIN is returned</dd></dl>
 
 </div>
 </div>
@@ -409,15 +386,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Get the device resolution. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Get the device resolution </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">deviceNumber</td><td>1-Wire device number </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>number of bits resolution (9, 10, 11 or 12) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>number of bits resolution (9, 10, 11 or 12)</dd></dl>
 
 </div>
 </div>
@@ -446,12 +421,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>return the 8-byte ROM address buffer </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>return the 8-byte ROM address buffer </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">deviceNumber</td><td>1-Wire device number </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">ROMBuffer</td><td>8-byte ROM address buffer of device </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ROMBuffer</td><td>8-byte ROM address buffer of device</td></tr>
   </table>
   </dd>
 </dl>
@@ -473,15 +446,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>reads all current device temperatures and returns the highest value </p>
+<p>reads all current device temperatures and returns the highest value</p>
 <p>If the optional skipDeviceNumber is specified then that device number is skipped; this is used when one of the thermometers is out-of-band - i.e. if it is attached to a heat source plate and reads much higher than the others. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">skipDeviceNumber</td><td>Device number to skip, defaults to no skipped device </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Maximum temperature </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Maximum temperature</dd></dl>
 
 </div>
 </div>
@@ -500,15 +472,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>reads all current device temperatures and returns the lowest value </p>
+<p>reads all current device temperatures and returns the lowest value</p>
 <p>If the optional skipDeviceNumber is specified then that device number is skipped; this is used when one of the thermometers is out-of-band - i.e. if it is attached to an evaporator plate and reads much lower than the others. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">skipDeviceNumber</td><td>Device number to skip, defaults to no skipped device </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Minimum temperature </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Minimum temperature</dd></dl>
 
 </div>
 </div>
@@ -537,8 +508,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>return the current temperature value for a given device number </p>
+<p>return the current temperature value for a given device number</p>
 <p>All devices except the DS18S20 return raw values in 0.0625°C increments, so the 0.5°C increments of the DS18S20 are converted to the same scale as the other devices. A check is done to see if there are still conversion(s) being done and a delay is made until any conversions have time to complete. We only store the value for conversion start time, so the delay might be for another devices and might not be necessary, but the alternative is to store the conversion times for each device which would potentially consume a lot of available memory </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">deviceNumber</td><td>1-Wire device number </td></tr>
@@ -546,7 +516,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Temperature reading in device units </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Temperature reading in device units</dd></dl>
 
 </div>
 </div>
@@ -564,9 +534,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Use the standardized 1-Wire microLAN search mechanism to discover all DS devices. </p>
-<p>Each device has a unique 8-byte ROM address, which is stored at the end of program's EEPROM. Since each Atmel chip has a different amount of memory, and the class constructor allows the user to specify a number of bytes to reserve at the the beginning of the EEPROM memory the maximum number of devices that can be processed by the class is variable. After each device is discovered the resolution is set to the maximum value and a conversion is initiated. This is done as soon as possible since a conversion at maximum resolution takes up to 750ms </p><dl class="section return"><dt>Returns</dt><dd>number of devices found </dd></dl>
+<p>Use the standardized 1-Wire microLAN search mechanism to discover all DS devices</p>
+<p>Each device has a unique 8-byte ROM address, which is stored at the end of program's EEPROM. Since each Atmel chip has a different amount of memory, and the class constructor allows the user to specify a number of bytes to reserve at the the beginning of the EEPROM memory the maximum number of devices that can be processed by the class is variable. After each device is discovered the resolution is set to the maximum value and a conversion is initiated. This is done as soon as possible since a conversion at maximum resolution takes up to 750ms </p><dl class="section return"><dt>Returns</dt><dd>number of devices found</dd></dl>
 
 </div>
 </div>
@@ -595,12 +564,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Set the user bytes 1 and 2 to the calibration computed. </p>
+<p>Set the user bytes 1 and 2 to the calibration computed</p>
 <p>The calibration value is written to register 1 and register is written as the XOR'd value of the the first register. This is done to check for an actual calibration value rather than some other value that the user might have written to the device </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">deviceNumber</td><td>1-Wire device number </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">offset</td><td>Calibration value to set </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">offset</td><td>Calibration value to set</td></tr>
   </table>
   </dd>
 </dl>
@@ -632,19 +600,18 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>set the resolution of the DS devices to 9, 10, 11 or 12 bits </p>
+<p>set the resolution of the DS devices to 9, 10, 11 or 12 bits</p>
 <p>Lower resolution results in a faster conversion time. The global ConversionMillis is set on the assumption that all devices are set to the same resolution<br />
 <br />
  Value Resolution Conversion<br />
-===== ========== ==========<br />
+ ===== ========== ==========<br />
  9 0.5°C 93.75ms<br />
  10 0.25°C 187.5 ms<br />
  11 0.125°C 375 ms<br />
  12 0.0625°C 750 ms </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">deviceNumber</td><td>1-Wire device number </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">resolution</td><td>Device resolution in bits: 9, 10, 11 or 12 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">resolution</td><td>Device resolution in bits: 9, 10, 11 or 12</td></tr>
   </table>
   </dd>
 </dl>
@@ -666,15 +633,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>reads all current device temperatures and returns the standard deviation </p>
+<p>reads all current device temperatures and returns the standard deviation</p>
 <p>If the optional skipDeviceNumber is specified then that device number is skipped; this is used when one of the thermometers is out-of-band and should be ignored </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">skipDeviceNumber</td><td>Device number to skip, defaults to no skipped device </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Floating point standard deviation </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Floating point standard deviation</dd></dl>
 
 </div>
 </div>
