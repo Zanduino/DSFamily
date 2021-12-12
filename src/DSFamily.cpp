@@ -380,20 +380,11 @@ void DSFamily_Class::SetDeviceResolution(const uint8_t deviceNumber, uint8_t res
   _LastCommandWasConvert = false;                          // Set switch to false
   if (resolution < 9 || resolution > 12) resolution = 12;  // Default to full resolution
   switch (resolution) {
-    case 12:
-      ConversionMillis = DS_12b_CONVERSION_TIME;
-      break;
-    case 11:
-      ConversionMillis = DS_11b_CONVERSION_TIME;
-      break;
-    case 10:
-      ConversionMillis = DS_10b_CONVERSION_TIME;
-      break;
-    case 9:
-      ConversionMillis = DS_9b_CONVERSION_TIME;
-      break;
-    default:
-      ConversionMillis = DS_12b_CONVERSION_TIME;
+    case 12: ConversionMillis = DS_12b_CONVERSION_TIME; break;
+    case 11: ConversionMillis = DS_11b_CONVERSION_TIME; break;
+    case 10: ConversionMillis = DS_10b_CONVERSION_TIME; break;
+    case 9: ConversionMillis = DS_9b_CONVERSION_TIME; break;
+    default: ConversionMillis = DS_12b_CONVERSION_TIME;
   }                                             // of switch statement for precision
   resolution = (resolution - 9) << 5;           // Shift resolution bits over
   Read1WireScratchpad(deviceNumber, dsBuffer);  // Read device scratchpad
@@ -576,7 +567,7 @@ void DSFamily_Class::select(const uint8_t rom[8]) {
 }  // of method select()
 uint8_t DSFamily_Class::search(uint8_t *newAddr) {
   /*!
-    @brief      Search the 1-Wire microLAN using the Dallas Semiconductor search algorith and code
+    @brief      Search the 1-Wire microLAN using the Dallas Semiconductor search algorithm and code
     @details    Perform a search. If this function returns a '1' then it has enumerated the next
                 device and you may retrieve the ROM from the OneWire::address variable. If there
                 are no devices, no further devices, or something horrible happens in the middle of

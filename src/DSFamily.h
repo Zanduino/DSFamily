@@ -90,69 +90,69 @@ Version| Date       | Developer  | Comments
 
 #include <EEPROM.h>  // Access the AVR EEPROM memory
 #if ARDUINO >= 100   // Include depending on version
-#include "Arduino.h"
+  #include "Arduino.h"
 #else
-#include "WProgram.h"
-#include "pins_arduino.h"  // for digitalPinToBitMask, etc.
+  #include "WProgram.h"
+  #include "pins_arduino.h"  // for digitalPinToBitMask, etc.
 #endif
 #if defined(__AVR__)  // Platform specific I/O definitions
-#define PIN_TO_BASEREG(OneWirePin) (portInputRegister(digitalPinToPort(OneWirePin)))
-#define PIN_TO_BITMASK(OneWirePin) (digitalPinToBitMask(OneWirePin))
-#define IO_REG_TYPE uint8_t
-#define IO_REG_ASM asm("r30")
-#define DIRECT_READ(base, mask) (((*(base)) & (mask)) ? 1 : 0)
-#define DIRECT_MODE_INPUT(base, mask) ((*((base) + 1)) &= ~(mask))
-#define DIRECT_MODE_OUTPUT(base, mask) ((*((base) + 1)) |= (mask))
-#define DIRECT_WRITE_LOW(base, mask) ((*((base) + 2)) &= ~(mask))
-#define DIRECT_WRITE_HIGH(base, mask) ((*((base) + 2)) |= (mask))
+  #define PIN_TO_BASEREG(OneWirePin) (portInputRegister(digitalPinToPort(OneWirePin)))
+  #define PIN_TO_BITMASK(OneWirePin) (digitalPinToBitMask(OneWirePin))
+  #define IO_REG_TYPE uint8_t
+  #define IO_REG_ASM asm("r30")
+  #define DIRECT_READ(base, mask) (((*(base)) & (mask)) ? 1 : 0)
+  #define DIRECT_MODE_INPUT(base, mask) ((*((base) + 1)) &= ~(mask))
+  #define DIRECT_MODE_OUTPUT(base, mask) ((*((base) + 1)) |= (mask))
+  #define DIRECT_WRITE_LOW(base, mask) ((*((base) + 2)) &= ~(mask))
+  #define DIRECT_WRITE_HIGH(base, mask) ((*((base) + 2)) |= (mask))
 #elif defined(__MK20DX128__)
-#define PIN_TO_BASEREG(OneWirePin) (portOutputRegister(OneWirePin))
-#define PIN_TO_BITMASK(OneWirePin) (1)
-#define IO_REG_TYPE uint8_t
-#define IO_REG_ASM
-#define DIRECT_READ(base, mask) (*((base) + 512))
-#define DIRECT_MODE_INPUT(base, mask) (*((base) + 640) = 0)
-#define DIRECT_MODE_OUTPUT(base, mask) (*((base) + 640) = 1)
-#define DIRECT_WRITE_LOW(base, mask) (*((base) + 256) = 1)
-#define DIRECT_WRITE_HIGH(base, mask) (*((base) + 128) = 1)
+  #define PIN_TO_BASEREG(OneWirePin) (portOutputRegister(OneWirePin))
+  #define PIN_TO_BITMASK(OneWirePin) (1)
+  #define IO_REG_TYPE uint8_t
+  #define IO_REG_ASM
+  #define DIRECT_READ(base, mask) (*((base) + 512))
+  #define DIRECT_MODE_INPUT(base, mask) (*((base) + 640) = 0)
+  #define DIRECT_MODE_OUTPUT(base, mask) (*((base) + 640) = 1)
+  #define DIRECT_WRITE_LOW(base, mask) (*((base) + 256) = 1)
+  #define DIRECT_WRITE_HIGH(base, mask) (*((base) + 128) = 1)
 #elif defined(__SAM3X8E__)
-/*************************************************************************************************
-** Arduino 1.5.1 may have a bug in delayMicroseconds() on Arduino Due. If you have trouble with **
-** OneWire on the Arduino Due, please check the status of delayMicroseconds() before reporting  **
-** a bug in OneWire! See                                                                        **
-** http://arduino.cc/forum/index.php/topic,141030.msg1076268.html#msg1076268 for details        **
-*************************************************************************************************/
-#define PIN_TO_BASEREG(OneWirePin) (&(digitalPinToPort(OneWirePin)->PIO_PER))
-#define PIN_TO_BITMASK(OneWirePin) (digitalPinToBitMask(OneWirePin))
-#define IO_REG_TYPE uint32_t
-#define IO_REG_ASM
-#define DIRECT_READ(base, mask) (((*((base) + 15)) & (mask)) ? 1 : 0)
-#define DIRECT_MODE_INPUT(base, mask) ((*((base) + 5)) = (mask))
-#define DIRECT_MODE_OUTPUT(base, mask) ((*((base) + 4)) = (mask))
-#define DIRECT_WRITE_LOW(base, mask) ((*((base) + 13)) = (mask))
-#define DIRECT_WRITE_HIGH(base, mask) ((*((base) + 12)) = (mask))
-#ifndef PROGMEM
-#define PROGMEM
-#endif
-#ifndef pgm_read_byte
-#define pgm_read_byte(addr) (*(const uint8_t *)(addr))
-#endif
+  /*************************************************************************************************
+  ** Arduino 1.5.1 may have a bug in delayMicroseconds() on Arduino Due. If you have trouble with **
+  ** OneWire on the Arduino Due, please check the status of delayMicroseconds() before reporting  **
+  ** a bug in OneWire! See                                                                        **
+  ** http://arduino.cc/forum/index.php/topic,141030.msg1076268.html#msg1076268 for details        **
+  *************************************************************************************************/
+  #define PIN_TO_BASEREG(OneWirePin) (&(digitalPinToPort(OneWirePin)->PIO_PER))
+  #define PIN_TO_BITMASK(OneWirePin) (digitalPinToBitMask(OneWirePin))
+  #define IO_REG_TYPE uint32_t
+  #define IO_REG_ASM
+  #define DIRECT_READ(base, mask) (((*((base) + 15)) & (mask)) ? 1 : 0)
+  #define DIRECT_MODE_INPUT(base, mask) ((*((base) + 5)) = (mask))
+  #define DIRECT_MODE_OUTPUT(base, mask) ((*((base) + 4)) = (mask))
+  #define DIRECT_WRITE_LOW(base, mask) ((*((base) + 13)) = (mask))
+  #define DIRECT_WRITE_HIGH(base, mask) ((*((base) + 12)) = (mask))
+  #ifndef PROGMEM
+    #define PROGMEM
+  #endif
+  #ifndef pgm_read_byte
+    #define pgm_read_byte(addr) (*(const uint8_t *)(addr))
+  #endif
 #elif defined(__PIC32MX__)
-#define PIN_TO_BASEREG(OneWirePin) (portModeRegister(digitalPinToPort(OneWirePin)))
-#define PIN_TO_BITMASK(OneWirePin) (digitalPinToBitMask(OneWirePin))
-#define IO_REG_TYPE uint32_t
-#define IO_REG_ASM
-#define DIRECT_READ(base, mask) (((*(base + 4)) & (mask)) ? 1 : 0)  // PORTX + 0x10
-#define DIRECT_MODE_INPUT(base, mask) ((*(base + 2)) = (mask))      // TRISXSET + 0x08
-#define DIRECT_MODE_OUTPUT(base, mask) ((*(base + 1)) = (mask))     // TRISXCLR + 0x04
-#define DIRECT_WRITE_LOW(base, mask) ((*(base + 8 + 1)) = (mask))   // LATXCLR  + 0x24
-#define DIRECT_WRITE_HIGH(base, mask) ((*(base + 8 + 2)) = (mask))  // LATXSET + 0x28
+  #define PIN_TO_BASEREG(OneWirePin) (portModeRegister(digitalPinToPort(OneWirePin)))
+  #define PIN_TO_BITMASK(OneWirePin) (digitalPinToBitMask(OneWirePin))
+  #define IO_REG_TYPE uint32_t
+  #define IO_REG_ASM
+  #define DIRECT_READ(base, mask) (((*(base + 4)) & (mask)) ? 1 : 0)  // PORTX + 0x10
+  #define DIRECT_MODE_INPUT(base, mask) ((*(base + 2)) = (mask))      // TRISXSET + 0x08
+  #define DIRECT_MODE_OUTPUT(base, mask) ((*(base + 1)) = (mask))     // TRISXCLR + 0x04
+  #define DIRECT_WRITE_LOW(base, mask) ((*(base + 8 + 1)) = (mask))   // LATXCLR  + 0x24
+  #define DIRECT_WRITE_HIGH(base, mask) ((*(base + 8 + 2)) = (mask))  // LATXSET + 0x28
 #else
-#error "Please define I/O register types here"
+  #error "Please define I/O register types here"
 #endif
 #ifndef DSFamily_h
-/** @brief  Guard code to prevent multiple definitions */
-#define DSFamily_h
+  /** @brief  Guard code to prevent multiple definitions */
+  #define DSFamily_h
 /*!
  * @class   DSFamily_Class
  * @brief   Access the available DS-Family devices on the 1-Wire bus
